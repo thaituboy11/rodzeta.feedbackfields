@@ -13,12 +13,16 @@ final class Utils {
 
 	const SRC_NAME = "/upload/rodzeta.feedbackfields.csv";
 
-	static function save($arFields) {
+	static function save($arFields, $arTemplate) {
 		$fields = array_filter(array_map("trim", explode("\n", Option::get("rodzeta.feedbackfields", "saved_fields"))));
 		if (count($fields) == 0) {
 			return;
 		}
-		$row = array();
+		$row = array(
+			date("Y-m-d H:i:s"),
+			$arTemplate["ID"],
+			$arTemplate["SUBJECT"],
+		);
 		foreach ($fields as $code) {
 			$row[] = isset($arFields[$code])? $arFields[$code] : "";
 		}
