@@ -23,12 +23,11 @@ final class Utils {
 		foreach ($fields as $code) {
 			$row[] = isset($arFields[$code])? $arFields[$code] : "";
 		}
-
 		$fp = fopen($_SERVER["DOCUMENT_ROOT"] . self::SRC_NAME, "a");
-		fputcsv($fp, $row, "\t");
-		fclose($fp);
-
-		//LOCK_EX
+		if ($fp) {
+			fputcsv($fp, $row, "\t");
+			fclose($fp);
+		}
 	}
 
 }
