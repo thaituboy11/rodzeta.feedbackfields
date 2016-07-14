@@ -17,7 +17,7 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeEventAdd",
 		if ($event != "FEEDBACK_FORM") {
 			return;
 		}
-		$fields = array_map("trim", explode("\n", Option::get("rodzeta.feedbackfields", "fields")));
+		$fields = array_filter(array_map("trim", explode("\n", Option::get("rodzeta.feedbackfields", "fields"))));
 		foreach ($fields as $code) {
 			if (isset($_POST[$code])) {
 				$arFields[$code] = filter_var($_POST[$code], FILTER_SANITIZE_STRING);

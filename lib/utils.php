@@ -14,7 +14,7 @@ final class Utils {
 	const SRC_NAME = "/upload/rodzeta.feedbackfields.csv";
 
 	static function save($arFields) {
-		$fields = array_map("trim", explode("\n", Option::get("rodzeta.feedbackfields", "saved_fields")));
+		$fields = array_filter(array_map("trim", explode("\n", Option::get("rodzeta.feedbackfields", "saved_fields"))));
 		if (count($fields) == 0) {
 			return;
 		}
