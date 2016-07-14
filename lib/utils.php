@@ -18,7 +18,6 @@ final class Utils {
 		if (count($fields) == 0) {
 			return;
 		}
-
 		$row = array();
 		foreach ($fields as $code) {
 			$row[] = isset($arFields[$code])? $arFields[$code] : "";
