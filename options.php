@@ -63,6 +63,10 @@ $tabControl->begin();
 
 	<?php $tabControl->beginNextTab() ?>
 
+	<tr class="heading">
+		<td colspan="2">Настройки дополнительных полей формы</td>
+	</tr>
+
 	<tr>
 		<td class="adm-detail-content-cell-l" width="50%">
 			<label>Список кодов для дополнительных полей</label>
@@ -75,6 +79,10 @@ USER_REGION
 USER_ADDRESS
 ..."><?= Option::get("rodzeta.feedbackfields", "fields") ?></textarea>
 		</td>
+	</tr>
+
+	<tr class="heading">
+		<td colspan="2">Настройки сохранения данных формы в csv-файл</td>
 	</tr>
 
 	<tr>
@@ -105,9 +113,9 @@ USER_ADDRESS
 		</td>
 	</tr>
 
-	<?php
-	 $tabControl->buttons();
-  ?>
+	<tr class="heading">
+		<td colspan="2">Настройки импорта данных формы в Bitrix24</td>
+	</tr>
 
   <tr>
 		<td class="adm-detail-content-cell-l" width="50%">
@@ -164,9 +172,13 @@ ADDRESS=USER_ADDRESS
 			<label>PASSWORD пользователя-"лидогенератора"</label>
 		</td>
 		<td class="adm-detail-content-cell-r" width="50%">
-			<input name="password" size="30" type="bitrix24_password" value="<?= Option::get("rodzeta.feedbackfields", "bitrix24_password") ?>" ?>
+			<input name="bitrix24_password" size="30" type="password" value="<?= Option::get("rodzeta.feedbackfields", "bitrix24_password") ?>" ?>
 		</td>
 	</tr>
+
+	<?php
+	 $tabControl->buttons();
+  ?>
 
   <input class="adm-btn-save" type="submit" name="save" value="Применить настройки">
 
