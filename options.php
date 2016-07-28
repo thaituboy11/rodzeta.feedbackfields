@@ -41,6 +41,12 @@ if ($request->isPost() && check_bitrix_sessid()) {
 		Option::set("rodzeta.feedbackfields", "save_form_data", $request->getPost("save_form_data"));
 		Option::set("rodzeta.feedbackfields", "saved_fields", $request->getPost("saved_fields"));
 
+		Option::set("rodzeta.feedbackfields", "import_to_bitrix24", $request->getPost("import_to_bitrix24"));
+		Option::set("rodzeta.feedbackfields", "bitrix24_fields", $request->getPost("bitrix24_fields"));
+		Option::set("rodzeta.feedbackfields", "bitrix24_login", $request->getPost("bitrix24_login"));
+		Option::set("rodzeta.feedbackfields", "bitrix24_password", $request->getPost("bitrix24_password"));
+		Option::set("rodzeta.feedbackfields", "bitrix24_portal_url", $request->getPost("bitrix24_portal_url"));
+
 		CAdminMessage::showMessage(array(
 	    "MESSAGE" => Loc::getMessage("RODZETA_FEEDBACKFIELDS_OPTIONS_SAVED"),
 	    "TYPE" => "OK",
@@ -102,6 +108,65 @@ USER_ADDRESS
 	<?php
 	 $tabControl->buttons();
   ?>
+
+  <tr>
+		<td class="adm-detail-content-cell-l" width="50%">
+			<label>Импортировать данные форм в Bitrix24</label>
+		</td>
+		<td class="adm-detail-content-cell-r" width="50%">
+			<input name="import_to_bitrix24" value="Y" type="checkbox"
+				<?= Option::get("rodzeta.feedbackfields", "import_to_bitrix24") == "Y"? "checked" : "" ?>>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="adm-detail-content-cell-l" width="50%">
+			<label>
+				Список соответствий вида<br>
+				<b>поле лида=поле формы</b><br>
+				см. <a href="https://dev.1c-bitrix.ru/community/blogs/chaos/crm-sozdanie-lidov-iz-drugikh-servisov.php" target="_blank">Полный список возможных полей</a>
+			</label>
+
+		</td>
+		<td class="adm-detail-content-cell-r" width="50%">
+			<textarea name="bitrix24_fields" rows="10" cols="40"
+				placeholder="например
+NAME=AUTHOR
+PHONE_MOBILE=USER_PHONE
+WEB_WORK=USER_SITE
+COMMENTS=TEXT
+EMAIL_WORK=AUTHOR_EMAIL
+ADDRESS=USER_ADDRESS
+..."><?= Option::get("rodzeta.feedbackfields", "bitrix24_fields") ?></textarea>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="adm-detail-content-cell-l" width="50%">
+			<label>Адрес портала Bitrix24</label>
+		</td>
+		<td class="adm-detail-content-cell-r" width="50%">
+			<input type="text" size="30" name="bitrix24_portal_url" value="<?= Option::get("rodzeta.feedbackfields", "bitrix24_portal_url") ?>" ?>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="adm-detail-content-cell-l" width="50%">
+			<label>LOGIN пользователя-"лидогенератора"</label>
+		</td>
+		<td class="adm-detail-content-cell-r" width="50%">
+			<input type="text" size="30" name="bitrix24_login" value="<?= Option::get("rodzeta.feedbackfields", "bitrix24_login") ?>" ?>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="adm-detail-content-cell-l" width="50%">
+			<label>PASSWORD пользователя-"лидогенератора"</label>
+		</td>
+		<td class="adm-detail-content-cell-r" width="50%">
+			<input name="password" size="30" type="bitrix24_password" value="<?= Option::get("rodzeta.feedbackfields", "bitrix24_password") ?>" ?>
+		</td>
+	</tr>
 
   <input class="adm-btn-save" type="submit" name="save" value="Применить настройки">
 
