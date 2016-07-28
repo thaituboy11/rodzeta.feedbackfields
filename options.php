@@ -82,7 +82,9 @@ USER_ADDRESS
 	</tr>
 
 	<tr class="heading">
-		<td colspan="2">Настройки сохранения данных формы в csv-файл</td>
+		<td colspan="2">Настройки сохранения данных формы в <a
+			target="_blank"
+			href="/bitrix/admin/fileman_file_edit.php?path=<?= urlencode(\Rodzeta\Feedbackfields\Utils::SRC_NAME) ?>">csv-файл</a></td>
 	</tr>
 
 	<tr>
