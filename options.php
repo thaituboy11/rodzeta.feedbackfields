@@ -7,11 +7,11 @@
 
 defined('B_PROLOG_INCLUDED') and (B_PROLOG_INCLUDED === true) or die();
 
-use Bitrix\Main\Application;
-use Bitrix\Main\Config\Option;
-use Bitrix\Main\Localization\Loc;
-use Bitrix\Main\Text\String;
-use Bitrix\Main\Loader;
+use \Bitrix\Main\Application;
+use \Bitrix\Main\Config\Option;
+use \Bitrix\Main\Localization\Loc;
+use \Bitrix\Main\Text\String;
+use \Bitrix\Main\Loader;
 
 if (!$USER->isAdmin()) {
 	$APPLICATION->authForm("ACCESS DENIED");
@@ -46,6 +46,9 @@ if ($request->isPost() && check_bitrix_sessid()) {
 		Option::set("rodzeta.feedbackfields", "bitrix24_login", $request->getPost("bitrix24_login"));
 		Option::set("rodzeta.feedbackfields", "bitrix24_password", $request->getPost("bitrix24_password"));
 		Option::set("rodzeta.feedbackfields", "bitrix24_portal_url", $request->getPost("bitrix24_portal_url"));
+
+		Option::set("rodzeta.feedbackfields", "use_redirect", $request->getPost("use_redirect"));
+		Option::set("rodzeta.feedbackfields", "redirect_url", $request->getPost("redirect_url"));
 
 		CAdminMessage::showMessage(array(
 	    "MESSAGE" => Loc::getMessage("RODZETA_FEEDBACKFIELDS_OPTIONS_SAVED"),
@@ -175,6 +178,29 @@ ADDRESS=USER_ADDRESS
 		</td>
 		<td class="adm-detail-content-cell-r" width="50%">
 			<input name="bitrix24_password" size="30" type="password" value="<?= Option::get("rodzeta.feedbackfields", "bitrix24_password") ?>" ?>
+		</td>
+	</tr>
+
+	<tr class="heading">
+		<td colspan="2">Настройки редиректа после отправки формы</td>
+	</tr>
+
+  <tr>
+		<td class="adm-detail-content-cell-l" width="50%">
+			<label>Использовать редирект после отправки формы</label>
+		</td>
+		<td class="adm-detail-content-cell-r" width="50%">
+			<input name="use_redirect" value="Y" type="checkbox"
+				<?= Option::get("rodzeta.feedbackfields", "use_redirect") == "Y"? "checked" : "" ?>>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="adm-detail-content-cell-l" width="50%">
+			<label>Урл по умолчанию для редиректа</label>
+		</td>
+		<td class="adm-detail-content-cell-r" width="50%">
+			<input type="text" size="30" name="redirect_url" value="<?= Option::get("rodzeta.feedbackfields", "redirect_url") ?>" ?>
 		</td>
 	</tr>
 
