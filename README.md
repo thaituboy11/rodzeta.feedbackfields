@@ -32,6 +32,12 @@
         value="<?= htmlspecialchars($_POST["USER_PHONE"]) ?>" 
         placeholder="Ваш номер телефона">
 
+### Пример редиректа для конкретной формы в component_epilog.php
+
+    if (strlen($arResult["OK_MESSAGE"]) > 0) {
+       LocalRedirect("/thank_you/");
+    }
+
 ## Описание техподдержки и контактных данных
 
 Тех. поддержка и кастомизация оказывается на платной основе, e-mail: rivetweb@yandex.ru
