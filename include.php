@@ -67,3 +67,15 @@ if (Option::get("rodzeta.feedbackfields", "import_to_bitrix24") == "Y") {
 		}
 	);
 }
+
+if (Option::get("rodzeta.feedbackfields", "use_redirect") == "Y"
+		&& trim(Option::get("rodzeta.feedbackfields", "redirect_url")) != "") {
+
+	EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function () {
+		if (CSite::InDir("/bitrix/") || empty($_REQUEST["success"])) {
+			return;
+		}
+		LocalRedirect(trim(Option::get("rodzeta.feedbackfields", "redirect_url")));
+	});
+
+}
