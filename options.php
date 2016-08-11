@@ -159,7 +159,7 @@ ADDRESS=USER_ADDRESS
 			<label>Адрес портала Bitrix24</label>
 		</td>
 		<td class="adm-detail-content-cell-r" width="50%">
-			<input type="text" size="30" name="bitrix24_portal_url" value="<?= Option::get("rodzeta.feedbackfields", "bitrix24_portal_url") ?>" ?>
+			<input type="text" size="30" name="bitrix24_portal_url" value="<?= Option::get("rodzeta.feedbackfields", "bitrix24_portal_url") ?>">
 		</td>
 	</tr>
 
@@ -168,7 +168,7 @@ ADDRESS=USER_ADDRESS
 			<label>LOGIN пользователя-"лидогенератора"</label>
 		</td>
 		<td class="adm-detail-content-cell-r" width="50%">
-			<input type="text" size="30" name="bitrix24_login" value="<?= Option::get("rodzeta.feedbackfields", "bitrix24_login") ?>" ?>
+			<input type="text" size="30" name="bitrix24_login" value="<?= Option::get("rodzeta.feedbackfields", "bitrix24_login") ?>">
 		</td>
 	</tr>
 
@@ -177,7 +177,10 @@ ADDRESS=USER_ADDRESS
 			<label>PASSWORD пользователя-"лидогенератора"</label>
 		</td>
 		<td class="adm-detail-content-cell-r" width="50%">
-			<input name="bitrix24_password" size="30" type="password" value="<?= Option::get("rodzeta.feedbackfields", "bitrix24_password") ?>" ?>
+			<input name="bitrix24_password" size="30" type="password"
+				readonly
+    		onfocus="this.removeAttribute('readonly')"
+    		value="<?= Option::get("rodzeta.feedbackfields", "bitrix24_password") ?>">
 		</td>
 	</tr>
 
@@ -200,7 +203,7 @@ ADDRESS=USER_ADDRESS
 			<label>Урл по умолчанию для редиректа</label>
 		</td>
 		<td class="adm-detail-content-cell-r" width="50%">
-			<input type="text" size="30" name="redirect_url" value="<?= Option::get("rodzeta.feedbackfields", "redirect_url") ?>" ?>
+			<input type="text" size="30" name="redirect_url" value="<?= Option::get("rodzeta.feedbackfields", "redirect_url") ?>">
 		</td>
 	</tr>
 
