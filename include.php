@@ -12,14 +12,15 @@ use \Bitrix\Main\EventManager;
 use \Bitrix\Main\Config\Option;
 use \Bitrix\Main\Web\HttpClient;
 
+return;
+
 EventManager::getInstance()->addEventHandler("main", "OnBeforeEventAdd",
 	function (&$event, &$lid, &$arFields, &$message_id, &$files) {
 		// check event type
 		if ($event != "FEEDBACK_FORM") {
 			return;
 		}
-		$fields = array_filter(array_map("trim", explode("\n", Option::get("rodzeta.feedbackfields", "fields"))));
-		foreach ($fields as $code) {
+		foreach (json_decode(Option::get("rodzeta.feedbackfields", "fields", "[]")) as $code) {
 			if (isset($_POST[$code])) {
 				$arFields[$code] = filter_var($_POST[$code], FILTER_SANITIZE_STRING);
 			}

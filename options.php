@@ -36,7 +36,7 @@ $tabControl = new CAdminTabControl("tabControl", array(
 
 if ($request->isPost() && check_bitrix_sessid()) {
 	if (!empty($save) || !empty($restore)) {
-		Option::set("rodzeta.feedbackfields", "fields", $request->getPost("fields"));
+		Option::set("rodzeta.feedbackfields", "fields", json_encode(array_filter($request->getPost("fields"))));
 		Option::set("rodzeta.feedbackfields", "save_form_data", $request->getPost("save_form_data"));
 		Option::set("rodzeta.feedbackfields", "saved_fields", $request->getPost("saved_fields"));
 
@@ -74,12 +74,25 @@ $tabControl->begin();
 			<label>Список кодов для дополнительных полей</label>
 		</td>
 		<td class="adm-detail-content-cell-r" width="50%">
+			<?php foreach (json_decode(Option::get("rodzeta.feedbackfields", "fields", "[]")) as $fieldCode) { ?>
+
+					<input name="fields[]" type="text" value="<?= htmlspecialcharsex($fieldCode) ?>" placeholder="USER_FIELD">
+
+			<?php } ?>
+			<?php foreach (range(1, 10) as $n) { ?>
+
+					<input name="fields[]" type="text" value="" placeholder="USER_FIELD">
+
+			<?php } ?>
+
+			<?php /*
 			<textarea name="fields" rows="10"
 				placeholder="например
 USER_PHONE
 USER_REGION
 USER_ADDRESS
 ..."><?= Option::get("rodzeta.feedbackfields", "fields") ?></textarea>
+			*/ ?>
 		</td>
 	</tr>
 
