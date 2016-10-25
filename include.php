@@ -12,8 +12,6 @@ use \Bitrix\Main\EventManager;
 use \Bitrix\Main\Config\Option;
 use \Bitrix\Main\Web\HttpClient;
 
-return;
-
 EventManager::getInstance()->addEventHandler("main", "OnBeforeEventAdd",
 	function (&$event, &$lid, &$arFields, &$message_id, &$files) {
 		// check event type
