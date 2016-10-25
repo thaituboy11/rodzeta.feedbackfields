@@ -36,9 +36,9 @@ $tabControl = new CAdminTabControl("tabControl", array(
 
 if ($request->isPost() && check_bitrix_sessid()) {
 	if (!empty($save) || !empty($restore)) {
-		Option::set("rodzeta.feedbackfields", "fields", json_encode(array_filter($request->getPost("fields"))));
+		Option::set("rodzeta.feedbackfields", "fields", json_encode(array_filter(array_map("trim", $request->getPost("fields")))));
 		Option::set("rodzeta.feedbackfields", "save_form_data", $request->getPost("save_form_data"));
-		Option::set("rodzeta.feedbackfields", "saved_fields", $request->getPost("saved_fields"));
+		Option::set("rodzeta.feedbackfields", "saved_fields", json_encode(array_filter(array_map("trim", $request->getPost("saved_fields")))));
 
 		Option::set("rodzeta.feedbackfields", "import_to_bitrix24", $request->getPost("import_to_bitrix24"));
 		Option::set("rodzeta.feedbackfields", "bitrix24_fields", $request->getPost("bitrix24_fields"));
@@ -84,14 +84,15 @@ $tabControl->begin();
 	</tr>
 
 	<tr class="heading">
-		<td colspan="2">Настройки сохранения данных формы в <a
-			target="_blank"
-			href="/bitrix/admin/fileman_file_edit.php?path=<?= urlencode(\Rodzeta\Feedbackfields\Utils::SRC_NAME) ?>">csv-файл</a></td>
+		<td colspan="2">Настройки сохранения данных форм в <a
+			target="_blank" href="<?= \Rodzeta\Feedbackfields\Utils::SRC_NAME ?>">csv-файл</a></td>
 	</tr>
 
 	<tr>
 		<td class="adm-detail-content-cell-l" width="50%">
-			<label>Сохранять данные форм в файл</label>
+			<label>
+				Сохранять данные форм в файл
+			</label>
 		</td>
 		<td class="adm-detail-content-cell-r" width="50%">
 			<input name="save_form_data" value="Y" type="checkbox"
@@ -102,18 +103,14 @@ $tabControl->begin();
 	<tr>
 		<td class="adm-detail-content-cell-l" width="50%">
 			<label>Список кодов полей сохраняемых в файл</label><br>
-			<b><a target="_blank"
-				href="/bitrix/admin/fileman_file_edit.php?path=<?= urlencode(\Rodzeta\Feedbackfields\Utils::SRC_NAME) ?>">rodzeta.feedbackfields.csv</a>
 		</td>
 		<td class="adm-detail-content-cell-r" width="50%">
-			<textarea name="saved_fields" rows="10"
-				placeholder="например
-AUTHOR
-AUTHOR_EMAIL
-TEXT
-USER_REGION
-USER_ADDRESS
-..."><?= Option::get("rodzeta.feedbackfields", "saved_fields") ?></textarea>
+			<?php foreach (json_decode(Option::get("rodzeta.feedbackfields", "saved_fields", "[]")) as $fieldCode) { ?>
+					<input name="saved_fields[]" type="text" value="<?= htmlspecialcharsex($fieldCode) ?>" placeholder="USER_FIELD">
+			<?php } ?>
+			<?php foreach (range(1, 10) as $n) { ?>
+					<input name="saved_fields[]" type="text" value="" placeholder="USER_FIELD">
+			<?php } ?>
 		</td>
 	</tr>
 
