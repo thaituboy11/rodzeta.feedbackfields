@@ -75,24 +75,11 @@ $tabControl->begin();
 		</td>
 		<td class="adm-detail-content-cell-r" width="50%">
 			<?php foreach (json_decode(Option::get("rodzeta.feedbackfields", "fields", "[]")) as $fieldCode) { ?>
-
 					<input name="fields[]" type="text" value="<?= htmlspecialcharsex($fieldCode) ?>" placeholder="USER_FIELD">
-
 			<?php } ?>
 			<?php foreach (range(1, 10) as $n) { ?>
-
 					<input name="fields[]" type="text" value="" placeholder="USER_FIELD">
-
 			<?php } ?>
-
-			<?php /*
-			<textarea name="fields" rows="10"
-				placeholder="например
-USER_PHONE
-USER_REGION
-USER_ADDRESS
-..."><?= Option::get("rodzeta.feedbackfields", "fields") ?></textarea>
-			*/ ?>
 		</td>
 	</tr>
 
