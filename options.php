@@ -5,6 +5,8 @@
  * MIT License
  ******************************************************************************/
 
+namespace Rodzeta\Feedbackfields;
+
 defined('B_PROLOG_INCLUDED') and (B_PROLOG_INCLUDED === true) or die();
 
 use \Bitrix\Main\Application;
@@ -22,7 +24,7 @@ $request = $context->getRequest();
 
 Loc::loadMessages(__FILE__);
 
-$tabControl = new CAdminTabControl("tabControl", array(
+$tabControl = new \CAdminTabControl("tabControl", array(
   array(
 		"DIV" => "edit1",
 		"TAB" => Loc::getMessage("RODZETA_FEEDBACKFIELDS_MAIN_TAB_SET"),
@@ -59,7 +61,7 @@ if ($request->isPost() && check_bitrix_sessid()) {
 		Option::set("rodzeta.feedbackfields", "use_redirect", $request->getPost("use_redirect"));
 		Option::set("rodzeta.feedbackfields", "redirect_url", $request->getPost("redirect_url"));
 
-		CAdminMessage::showMessage(array(
+		\CAdminMessage::showMessage(array(
 	    "MESSAGE" => Loc::getMessage("RODZETA_FEEDBACKFIELDS_OPTIONS_SAVED"),
 	    "TYPE" => "OK",
 	  ));
@@ -75,17 +77,26 @@ $tabControl->begin();
 
 	<?php $tabControl->beginNextTab() ?>
 
-	<tr>
+	<tr valign="top">
 		<td class="adm-detail-content-cell-l" width="50%">
 			<label>Список кодов для дополнительных полей</label>
 		</td>
 		<td class="adm-detail-content-cell-r" width="50%">
-			<?php foreach (json_decode(Option::get("rodzeta.feedbackfields", "fields", "[]")) as $fieldCode) { ?>
-					<input name="fields[]" type="text" value="<?= htmlspecialcharsex($fieldCode) ?>" placeholder="USER_FIELD">
-			<?php } ?>
-			<?php foreach (range(1, 5) as $n) { ?>
-					<input name="fields[]" type="text" value="" placeholder="USER_FIELD">
-			<?php } ?>
+
+			<table width="100%" class="rodzeta-feedbackfields-table">
+				<tbody>
+					<?php foreach (AppendValues(json_decode(
+								Option::get("rodzeta.feedbackfields", "fields", "[]"), true
+							), 5, "") as $i => $fieldCode) { ?>
+						<tr data-idx="<?= $i ?>">
+							<td>
+								<input name="fields[<?= $i ?>]" type="text" placeholder="USER_FIELD"
+									value="<?= htmlspecialcharsex($fieldCode) ?>">
+							</td>
+						</tr>
+					<?php } ?>
+				</tbody>
+			</table>
 		</td>
 	</tr>
 
@@ -122,7 +133,7 @@ $tabControl->begin();
 		</td>
 	</tr>
 
-	<tr>
+	<tr valign="top">
 		<td class="adm-detail-content-cell-l" width="50%">
 			<label>Список кодов полей сохраняемых в файл</label><br>
 		</td>
@@ -207,6 +218,45 @@ ADDRESS=USER_ADDRESS
   <input class="adm-btn-save" type="submit" name="save" value="Применить настройки">
 
 </form>
+
+<script>
+
+BX.ready(function () {
+	"use strict";
+
+	function makeAutoAppend($table) {
+
+		function bindEvents($row) {
+			for (let $input of $row.querySelectorAll('input[type="text"]')) {
+				$input.addEventListener("change", function (event) {
+					let $tr = event.target.closest("tr");
+					let $trLast = $table.rows[$table.rows.length - 1];
+					if ($tr != $trLast) {
+						return;
+					}
+					$table.insertRow(-1);
+					$trLast = $table.rows[$table.rows.length - 1];
+					$trLast.innerHTML = $tr.innerHTML;
+					let idx = parseInt($tr.getAttribute("data-idx")) + 1;
+					$trLast.setAttribute("data-idx", idx);
+					for (let $input of $trLast.querySelectorAll('input[type="text"]')) {
+						$input.setAttribute("name", $input.getAttribute("name").replace(/([a-zA-Z0-9])\[\d+\]/, "$1[" + idx + "]"));
+					}
+					bindEvents($trLast);
+				});
+			}
+		}
+
+		for (let $row of document.querySelectorAll(".rodzeta-feedbackfields-table tr")) {
+			bindEvents($row);
+		}
+	}
+
+	makeAutoAppend(document.querySelector(".rodzeta-feedbackfields-table"));
+
+});
+
+</script>
 
 <?php
 
