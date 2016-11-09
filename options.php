@@ -28,6 +28,16 @@ $tabControl = new CAdminTabControl("tabControl", array(
 		"TAB" => Loc::getMessage("RODZETA_FEEDBACKFIELDS_MAIN_TAB_SET"),
 		"TITLE" => Loc::getMessage("RODZETA_FEEDBACKFIELDS_MAIN_TAB_TITLE_SET"),
   ),
+  array(
+		"DIV" => "edit2",
+		"TAB" => Loc::getMessage("RODZETA_FEEDBACKFIELDS_FILE_TAB_SET"),
+		"TITLE" => Loc::getMessage("RODZETA_FEEDBACKFIELDS_FILE_TAB_TITLE_SET"),
+  ),
+  array(
+		"DIV" => "edit3",
+		"TAB" => Loc::getMessage("RODZETA_FEEDBACKFIELDS_BITRIX24_TAB_SET"),
+		"TITLE" => Loc::getMessage("RODZETA_FEEDBACKFIELDS_BITRIX24_TAB_TITLE_SET"),
+  ),
 ));
 
 ?>
@@ -65,10 +75,6 @@ $tabControl->begin();
 
 	<?php $tabControl->beginNextTab() ?>
 
-	<tr class="heading">
-		<td colspan="2">Настройки дополнительных полей формы</td>
-	</tr>
-
 	<tr>
 		<td class="adm-detail-content-cell-l" width="50%">
 			<label>Список кодов для дополнительных полей</label>
@@ -77,16 +83,32 @@ $tabControl->begin();
 			<?php foreach (json_decode(Option::get("rodzeta.feedbackfields", "fields", "[]")) as $fieldCode) { ?>
 					<input name="fields[]" type="text" value="<?= htmlspecialcharsex($fieldCode) ?>" placeholder="USER_FIELD">
 			<?php } ?>
-			<?php foreach (range(1, 10) as $n) { ?>
+			<?php foreach (range(1, 5) as $n) { ?>
 					<input name="fields[]" type="text" value="" placeholder="USER_FIELD">
 			<?php } ?>
 		</td>
 	</tr>
 
-	<tr class="heading">
-		<td colspan="2">Настройки сохранения данных форм в <a
-			target="_blank" href="<?= \Rodzeta\Feedbackfields\Utils::SRC_NAME ?>">csv-файл</a></td>
+	<tr>
+		<td class="adm-detail-content-cell-l" width="50%">
+			<label>Использовать редирект после отправки формы</label>
+		</td>
+		<td class="adm-detail-content-cell-r" width="50%">
+			<input name="use_redirect" value="Y" type="checkbox"
+				<?= Option::get("rodzeta.feedbackfields", "use_redirect") == "Y"? "checked" : "" ?>>
+		</td>
 	</tr>
+
+	<tr>
+		<td class="adm-detail-content-cell-l" width="50%">
+			<label>Урл по умолчанию для редиректа</label>
+		</td>
+		<td class="adm-detail-content-cell-r" width="50%">
+			<input type="text" size="30" name="redirect_url" value="<?= Option::get("rodzeta.feedbackfields", "redirect_url") ?>">
+		</td>
+	</tr>
+
+	<?php $tabControl->beginNextTab() ?>
 
 	<tr>
 		<td class="adm-detail-content-cell-l" width="50%">
@@ -108,15 +130,13 @@ $tabControl->begin();
 			<?php foreach (json_decode(Option::get("rodzeta.feedbackfields", "saved_fields", "[]")) as $fieldCode) { ?>
 					<input name="saved_fields[]" type="text" value="<?= htmlspecialcharsex($fieldCode) ?>" placeholder="USER_FIELD">
 			<?php } ?>
-			<?php foreach (range(1, 10) as $n) { ?>
+			<?php foreach (range(1, 5) as $n) { ?>
 					<input name="saved_fields[]" type="text" value="" placeholder="USER_FIELD">
 			<?php } ?>
 		</td>
 	</tr>
 
-	<tr class="heading">
-		<td colspan="2">Настройки импорта данных формы в Bitrix24</td>
-	</tr>
+	<?php $tabControl->beginNextTab() ?>
 
   <tr>
 		<td class="adm-detail-content-cell-l" width="50%">
@@ -177,29 +197,6 @@ ADDRESS=USER_ADDRESS
 				readonly
     		onfocus="this.removeAttribute('readonly')"
     		value="<?= Option::get("rodzeta.feedbackfields", "bitrix24_password") ?>">
-		</td>
-	</tr>
-
-	<tr class="heading">
-		<td colspan="2">Настройки редиректа после отправки формы</td>
-	</tr>
-
-  <tr>
-		<td class="adm-detail-content-cell-l" width="50%">
-			<label>Использовать редирект после отправки формы</label>
-		</td>
-		<td class="adm-detail-content-cell-r" width="50%">
-			<input name="use_redirect" value="Y" type="checkbox"
-				<?= Option::get("rodzeta.feedbackfields", "use_redirect") == "Y"? "checked" : "" ?>>
-		</td>
-	</tr>
-
-	<tr>
-		<td class="adm-detail-content-cell-l" width="50%">
-			<label>Урл по умолчанию для редиректа</label>
-		</td>
-		<td class="adm-detail-content-cell-r" width="50%">
-			<input type="text" size="30" name="redirect_url" value="<?= Option::get("rodzeta.feedbackfields", "redirect_url") ?>">
 		</td>
 	</tr>
 
