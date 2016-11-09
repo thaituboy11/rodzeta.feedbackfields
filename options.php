@@ -21,6 +21,7 @@ if (!$USER->isAdmin()) {
 $app = Application::getInstance();
 $context = $app->getContext();
 $request = $context->getRequest();
+$config = Config();
 
 Loc::loadMessages(__FILE__);
 
@@ -48,7 +49,7 @@ $tabControl = new \CAdminTabControl("tabControl", array(
 
 if ($request->isPost() && check_bitrix_sessid()) {
 	if (!empty($save) || !empty($restore)) {
-		Option::set("rodzeta.feedbackfields", "fields", json_encode(array_filter(array_map("trim", $request->getPost("fields")))));
+
 		Option::set("rodzeta.feedbackfields", "save_form_data", $request->getPost("save_form_data"));
 		Option::set("rodzeta.feedbackfields", "saved_fields", json_encode(array_filter(array_map("trim", $request->getPost("saved_fields")))));
 
@@ -60,6 +61,8 @@ if ($request->isPost() && check_bitrix_sessid()) {
 
 		Option::set("rodzeta.feedbackfields", "use_redirect", $request->getPost("use_redirect"));
 		Option::set("rodzeta.feedbackfields", "redirect_url", $request->getPost("redirect_url"));
+
+		CreateCache($request->getPost("fields"));
 
 		\CAdminMessage::showMessage(array(
 	    "MESSAGE" => Loc::getMessage("RODZETA_FEEDBACKFIELDS_OPTIONS_SAVED"),
@@ -85,9 +88,7 @@ $tabControl->begin();
 
 			<table width="100%" class="rodzeta-feedbackfields-table">
 				<tbody>
-					<?php foreach (AppendValues(json_decode(
-								Option::get("rodzeta.feedbackfields", "fields", "[]"), true
-							), 5, "") as $i => $fieldCode) { ?>
+					<?php foreach (AppendValues($config["fields"], 5, "") as $i => $fieldCode) { ?>
 						<tr data-idx="<?= $i ?>">
 							<td>
 								<input name="fields[<?= $i ?>]" type="text" placeholder="USER_FIELD"
