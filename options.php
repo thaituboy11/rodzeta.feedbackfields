@@ -124,7 +124,7 @@ $tabControl->begin();
 	<tr>
 		<td class="adm-detail-content-cell-l" width="50%">
 			<label>
-				Сохранять данные форм в файл
+				Сохранять в файл
 			</label>
 		</td>
 		<td class="adm-detail-content-cell-r" width="50%">
@@ -135,7 +135,7 @@ $tabControl->begin();
 
 	<tr valign="top">
 		<td class="adm-detail-content-cell-l" width="50%">
-			<label>Список кодов полей сохраняемых в файл</label><br>
+			<label>Список кодов полей</label><br>
 		</td>
 		<td class="adm-detail-content-cell-r" width="50%">
 			<?php foreach (json_decode(Option::get("rodzeta.feedbackfields", "saved_fields", "[]")) as $fieldCode) { ?>
