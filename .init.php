@@ -24,6 +24,17 @@ function CreateCache($options) {
 	$options["fields"] = array_filter(array_map("trim", $options["fields"]));
 	$options["fields_to_file"] = array_filter(array_map("trim", $options["fields_to_file"]));
 
+	$tmp = [];
+	foreach ($options["fields_to_bitrix24"] as $v) {
+		$v["BITRIX24"] = trim($v["BITRIX24"]);
+		$v["FIELD"] = trim($v["FIELD"]);
+		if ($v["BITRIX24"] == "" || $v["FIELD"] == "" ) {
+			continue;
+		}
+		$tmp[$v["BITRIX24"]] = $v["FIELD"];
+	}
+	$options["fields_to_bitrix24"] = $tmp;
+
 	\Encoding\PhpArray\Write($basePath . FILE_OPTIONS, $options);
 }
 

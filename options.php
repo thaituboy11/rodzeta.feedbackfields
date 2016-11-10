@@ -51,7 +51,6 @@ if ($request->isPost() && check_bitrix_sessid()) {
 		Option::set("rodzeta.feedbackfields", "save_form_data", $request->getPost("save_form_data"));
 
 		Option::set("rodzeta.feedbackfields", "import_to_bitrix24", $request->getPost("import_to_bitrix24"));
-		Option::set("rodzeta.feedbackfields", "bitrix24_fields", $request->getPost("bitrix24_fields"));
 		Option::set("rodzeta.feedbackfields", "bitrix24_login", $request->getPost("bitrix24_login"));
 		Option::set("rodzeta.feedbackfields", "bitrix24_password", $request->getPost("bitrix24_password"));
 		Option::set("rodzeta.feedbackfields", "bitrix24_portal_url", $request->getPost("bitrix24_portal_url"));
@@ -61,7 +60,8 @@ if ($request->isPost() && check_bitrix_sessid()) {
 
 		CreateCache([
 			"fields" => $request->getPost("fields"),
-			"fields_to_file" => $request->getPost("fields_to_file")
+			"fields_to_file" => $request->getPost("fields_to_file"),
+			"fields_to_bitrix24" => $request->getPost("fields_to_bitrix24"),
 		]);
 
 		\CAdminMessage::showMessage([
@@ -93,7 +93,7 @@ $tabControl->begin();
 					<?php foreach (AppendValues($config["fields"], 5, "") as $i => $fieldCode) { ?>
 						<tr data-idx="<?= $i ?>">
 							<td>
-								<input name="fields[<?= $i ?>]" type="text" placeholder="USER_FIELD"
+								<input name="fields[<?= $i ?>]" type="text" placeholder="Код поля"
 									value="<?= htmlspecialcharsex($fieldCode) ?>">
 							</td>
 						</tr>
@@ -148,7 +148,7 @@ $tabControl->begin();
 					<?php foreach (AppendValues($config["fields_to_file"], 5, "") as $i => $fieldCode) { ?>
 						<tr data-idx="<?= $i ?>">
 							<td>
-								<input name="fields_to_file[<?= $i ?>]" type="text" placeholder="USER_FIELD"
+								<input name="fields_to_file[<?= $i ?>]" type="text" placeholder="Код поля"
 									value="<?= htmlspecialcharsex($fieldCode) ?>">
 							</td>
 						</tr>
@@ -171,25 +171,34 @@ $tabControl->begin();
 		</td>
 	</tr>
 
-	<tr>
+	<tr valign="top">
 		<td class="adm-detail-content-cell-l" width="50%">
 			<label>
-				Список соответствий вида<br>
-				<b>поле лида=поле формы</b><br>
-				см. <a href="https://dev.1c-bitrix.ru/community/blogs/chaos/crm-sozdanie-lidov-iz-drugikh-servisov.php" target="_blank">Полный список возможных полей</a>
+				<a href="https://dev.1c-bitrix.ru/community/blogs/chaos/crm-sozdanie-lidov-iz-drugikh-servisov.php" target="_blank">Полный список возможных полей</a>
 			</label>
-
 		</td>
 		<td class="adm-detail-content-cell-r" width="50%">
-			<textarea name="bitrix24_fields" rows="10" cols="40"
-				placeholder="например
-NAME=AUTHOR
-PHONE_MOBILE=USER_PHONE
-WEB_WORK=USER_SITE
-COMMENTS=TEXT
-EMAIL_WORK=AUTHOR_EMAIL
-ADDRESS=USER_ADDRESS
-..."><?= Option::get("rodzeta.feedbackfields", "bitrix24_fields") ?></textarea>
+
+			<table width="100%" class="js-table-autoappendrows">
+				<tbody>
+					<?php // TODO fix output
+					foreach (AppendValues($config["fields_to_bitrix24"], 5, ["", ""]) as $i => $v) { ?>
+						<tr data-idx="<?= $i ?>">
+							<td>
+								<input name="fields_to_bitrix24[<?= $i ?>][BITRIX24]" type="text" placeholder="Код поля bitrix24"
+									value="<?= htmlspecialcharsex($v["BITRIX24"]) ?>"
+									style="width:96%;">
+							</td>
+							<td>
+								<input name="fields_to_bitrix24[<?= $i ?>][FIELD]" type="text" placeholder="Код поля"
+									value="<?= htmlspecialcharsex($v["FIELD"]) ?>"
+									style="width:96%;">
+							</td>
+						</tr>
+					<?php } ?>
+				</tbody>
+			</table>
+
 		</td>
 	</tr>
 
