@@ -174,6 +174,8 @@ $tabControl->begin();
 	<tr valign="top">
 		<td class="adm-detail-content-cell-l" width="50%">
 			<label>
+				Список соответствий полей лида и полей формы
+				<br>
 				<a href="https://dev.1c-bitrix.ru/community/blogs/chaos/crm-sozdanie-lidov-iz-drugikh-servisov.php" target="_blank">Полный список возможных полей</a>
 			</label>
 		</td>
@@ -191,7 +193,7 @@ $tabControl->begin();
 					?>
 						<tr data-idx="<?= $i ?>">
 							<td>
-								<input name="fields_to_bitrix24[<?= $i ?>][BITRIX24]" type="text" placeholder="Код поля bitrix24"
+								<input name="fields_to_bitrix24[<?= $i ?>][BITRIX24]" type="text" placeholder="Код поля Bitrix24"
 									value="<?= htmlspecialcharsex($bitrix24Code) ?>"
 									style="width:96%;">
 							</td>

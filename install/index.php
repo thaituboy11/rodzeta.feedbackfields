@@ -51,6 +51,16 @@ class rodzeta_feedbackfields extends CModule {
 		$this->PARTNER_URI = "http://rodzeta.ru/";
 	}
 
+	function InstallFiles() {
+		// copy example if not exists
+		$fname = $_SERVER["DOCUMENT_ROOT"] . "/upload/." . $this->MODULE_ID . ".php";
+		if (!file_exists($fname)) {
+			copy($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/" . $this->MODULE_ID . "/install/data/." . $this->MODULE_ID . ".php", $fname);
+		}
+
+		return true;
+	}
+
 	function DoInstall() {
 		if (version_compare(PHP_VERSION, '7', '<')) {
 			global $APPLICATION;
@@ -60,6 +70,7 @@ class rodzeta_feedbackfields extends CModule {
 
 		ModuleManager::registerModule($this->MODULE_ID);
 		RegisterModuleDependences("main", "OnPageStart", $this->MODULE_ID);
+		$this->InstallFiles();
 	}
 
 	function DoUninstall() {
