@@ -181,17 +181,23 @@ $tabControl->begin();
 
 			<table width="100%" class="js-table-autoappendrows">
 				<tbody>
-					<?php // TODO fix output
-					foreach (AppendValues($config["fields_to_bitrix24"], 5, ["", ""]) as $i => $v) { ?>
+					<?php
+						$i = 0;
+						foreach (AppendValues($config["fields_to_bitrix24"], 5, "") as $bitrix24Code => $fieldCode) {
+							$i++;
+							if (empty($fieldCode)) {
+								$bitrix24Code = "";
+							}
+					?>
 						<tr data-idx="<?= $i ?>">
 							<td>
 								<input name="fields_to_bitrix24[<?= $i ?>][BITRIX24]" type="text" placeholder="Код поля bitrix24"
-									value="<?= htmlspecialcharsex($v["BITRIX24"]) ?>"
+									value="<?= htmlspecialcharsex($bitrix24Code) ?>"
 									style="width:96%;">
 							</td>
 							<td>
 								<input name="fields_to_bitrix24[<?= $i ?>][FIELD]" type="text" placeholder="Код поля"
-									value="<?= htmlspecialcharsex($v["FIELD"]) ?>"
+									value="<?= htmlspecialcharsex($fieldCode) ?>"
 									style="width:96%;">
 							</td>
 						</tr>
