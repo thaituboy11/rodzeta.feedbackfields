@@ -72,10 +72,6 @@ if ($request->isPost() && check_bitrix_sessid()) {
 	}
 }
 
-var_dump(
-	json_decode(Option::get("rodzeta.feedbackfields", "saved_fields", "[]"))
-);
-
 $tabControl->begin();
 
 ?>
