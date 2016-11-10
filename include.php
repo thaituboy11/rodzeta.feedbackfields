@@ -51,14 +51,13 @@ if (Option::get("rodzeta.feedbackfields", "import_to_bitrix24") == "Y") {
 				return;
 			}
 
-			$fields = parse_ini_string(Option::get("rodzeta.feedbackfields", "bitrix24_fields"));
 			$client = new HttpClient();
 			$postData = [
 				"LOGIN" => Option::get("rodzeta.feedbackfields", "bitrix24_login"),
 				"PASSWORD" => Option::get("rodzeta.feedbackfields", "bitrix24_password"),
 				"TITLE" => $arTemplate["SUBJECT"],
 			];
-			foreach ($fields as $dest => $src) {
+			foreach (Config()["fields_to_bitrix24"] as $dest => $src) {
 				if (isset($arFields[$src])) {
 					$postData[$dest] = $arFields[$src];
 				}
