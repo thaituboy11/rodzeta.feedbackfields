@@ -49,9 +49,7 @@ $tabControl = new \CAdminTabControl("tabControl", array(
 
 if ($request->isPost() && check_bitrix_sessid()) {
 	if (!empty($save) || !empty($restore)) {
-
 		Option::set("rodzeta.feedbackfields", "save_form_data", $request->getPost("save_form_data"));
-		Option::set("rodzeta.feedbackfields", "saved_fields", json_encode(array_filter(array_map("trim", $request->getPost("saved_fields")))));
 
 		Option::set("rodzeta.feedbackfields", "import_to_bitrix24", $request->getPost("import_to_bitrix24"));
 		Option::set("rodzeta.feedbackfields", "bitrix24_fields", $request->getPost("bitrix24_fields"));
@@ -62,7 +60,10 @@ if ($request->isPost() && check_bitrix_sessid()) {
 		Option::set("rodzeta.feedbackfields", "use_redirect", $request->getPost("use_redirect"));
 		Option::set("rodzeta.feedbackfields", "redirect_url", $request->getPost("redirect_url"));
 
-		CreateCache($request->getPost("fields"));
+		CreateCache([
+			"fields" => $request->getPost("fields"),
+			"fields_to_file" => $request->getPost("fields_to_file")
+		]);
 
 		\CAdminMessage::showMessage(array(
 	    "MESSAGE" => Loc::getMessage("RODZETA_FEEDBACKFIELDS_OPTIONS_SAVED"),
@@ -70,6 +71,10 @@ if ($request->isPost() && check_bitrix_sessid()) {
 	  ));
 	}
 }
+
+var_dump(
+	json_decode(Option::get("rodzeta.feedbackfields", "saved_fields", "[]"))
+);
 
 $tabControl->begin();
 
@@ -86,7 +91,7 @@ $tabControl->begin();
 		</td>
 		<td class="adm-detail-content-cell-r" width="50%">
 
-			<table width="100%" class="rodzeta-feedbackfields-table">
+			<table width="100%" class="js-table-autoappendrows">
 				<tbody>
 					<?php foreach (AppendValues($config["fields"], 5, "") as $i => $fieldCode) { ?>
 						<tr data-idx="<?= $i ?>">
@@ -98,6 +103,7 @@ $tabControl->begin();
 					<?php } ?>
 				</tbody>
 			</table>
+
 		</td>
 	</tr>
 
@@ -139,12 +145,20 @@ $tabControl->begin();
 			<label>Список кодов полей</label><br>
 		</td>
 		<td class="adm-detail-content-cell-r" width="50%">
-			<?php foreach (json_decode(Option::get("rodzeta.feedbackfields", "saved_fields", "[]")) as $fieldCode) { ?>
-					<input name="saved_fields[]" type="text" value="<?= htmlspecialcharsex($fieldCode) ?>" placeholder="USER_FIELD">
-			<?php } ?>
-			<?php foreach (range(1, 5) as $n) { ?>
-					<input name="saved_fields[]" type="text" value="" placeholder="USER_FIELD">
-			<?php } ?>
+
+			<table width="100%" class="js-table-autoappendrows">
+				<tbody>
+					<?php foreach (AppendValues($config["fields_to_file"], 5, "") as $i => $fieldCode) { ?>
+						<tr data-idx="<?= $i ?>">
+							<td>
+								<input name="fields_to_file[<?= $i ?>]" type="text" placeholder="USER_FIELD"
+									value="<?= htmlspecialcharsex($fieldCode) ?>">
+							</td>
+						</tr>
+					<?php } ?>
+				</tbody>
+			</table>
+
 		</td>
 	</tr>
 
@@ -226,7 +240,6 @@ BX.ready(function () {
 	"use strict";
 
 	function makeAutoAppend($table) {
-
 		function bindEvents($row) {
 			for (let $input of $row.querySelectorAll('input[type="text"]')) {
 				$input.addEventListener("change", function (event) {
@@ -247,13 +260,14 @@ BX.ready(function () {
 				});
 			}
 		}
-
-		for (let $row of document.querySelectorAll(".rodzeta-feedbackfields-table tr")) {
+		for (let $row of document.querySelectorAll(".js-table-autoappendrows tr")) {
 			bindEvents($row);
 		}
 	}
 
-	makeAutoAppend(document.querySelector(".rodzeta-feedbackfields-table"));
+	for (let $table of document.querySelectorAll(".js-table-autoappendrows")) {
+		makeAutoAppend($table);
+	}
 
 });
 
