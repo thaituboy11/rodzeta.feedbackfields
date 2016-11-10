@@ -37,7 +37,7 @@ if (Option::get("rodzeta.feedbackfields", "save_form_data") == "Y") {
 		if ($arTemplate["EVENT_NAME"] != EVENT_FEEDBACK_FORM) {
 			return;
 		}
-		Utils::save($arFields, $arTemplate);
+		SaveFields($arFields, $arTemplate);
 	});
 
 }

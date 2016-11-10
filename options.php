@@ -21,7 +21,6 @@ if (!$USER->isAdmin()) {
 $app = Application::getInstance();
 $context = $app->getContext();
 $request = $context->getRequest();
-$config = Config();
 
 Loc::loadMessages(__FILE__);
 
@@ -71,6 +70,8 @@ if ($request->isPost() && check_bitrix_sessid()) {
 	  ));
 	}
 }
+
+$config = Config();
 
 $tabControl->begin();
 
