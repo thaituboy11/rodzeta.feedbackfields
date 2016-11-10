@@ -24,23 +24,23 @@ $request = $context->getRequest();
 
 Loc::loadMessages(__FILE__);
 
-$tabControl = new \CAdminTabControl("tabControl", array(
-  array(
+$tabControl = new \CAdminTabControl("tabControl", [
+  [
 		"DIV" => "edit1",
 		"TAB" => Loc::getMessage("RODZETA_FEEDBACKFIELDS_MAIN_TAB_SET"),
 		"TITLE" => Loc::getMessage("RODZETA_FEEDBACKFIELDS_MAIN_TAB_TITLE_SET"),
-  ),
-  array(
+  ],
+  [
 		"DIV" => "edit2",
 		"TAB" => Loc::getMessage("RODZETA_FEEDBACKFIELDS_FILE_TAB_SET"),
-		"TITLE" => Loc::getMessage("RODZETA_FEEDBACKFIELDS_FILE_TAB_TITLE_SET"),
-  ),
-  array(
+		"TITLE" => Loc::getMessage("RODZETA_FEEDBACKFIELDS_FILE_TAB_TITLE_SET", ["#FILE#" => FILE_FORMS]),
+  ],
+  [
 		"DIV" => "edit3",
 		"TAB" => Loc::getMessage("RODZETA_FEEDBACKFIELDS_BITRIX24_TAB_SET"),
 		"TITLE" => Loc::getMessage("RODZETA_FEEDBACKFIELDS_BITRIX24_TAB_TITLE_SET"),
-  ),
-));
+  ],
+]);
 
 ?>
 
@@ -64,10 +64,10 @@ if ($request->isPost() && check_bitrix_sessid()) {
 			"fields_to_file" => $request->getPost("fields_to_file")
 		]);
 
-		\CAdminMessage::showMessage(array(
+		\CAdminMessage::showMessage([
 	    "MESSAGE" => Loc::getMessage("RODZETA_FEEDBACKFIELDS_OPTIONS_SAVED"),
 	    "TYPE" => "OK",
-	  ));
+	  ]);
 	}
 }
 
