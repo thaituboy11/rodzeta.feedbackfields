@@ -33,12 +33,13 @@ if ($formSaved) {
 	//Update($optionsKey, $request->getPostList());
 }
 
-//$currentOptions = Select();
-/*
-$currentOptions = array_merge([
-	//...
-], $currentOptions);
-*/
+$config = Config();
+$currentOptions = AppendValues($config["fields"], 5, ""); //Select();
+$currentOptions = array_unique(array_merge([
+	"USER_REGION",
+	"USER_PHONE",
+	"USER_SITE",
+], $currentOptions));
 
 ?>
 
@@ -49,7 +50,7 @@ $currentOptions = array_merge([
 
 	<table width="100%" class="js-table-autoappendrows">
 		<tbody>
-			<?php foreach (AppendValues($config["fields"], 5, "") as $i => $fieldCode) { ?>
+			<?php foreach ($currentOptions as $i => $fieldCode) { ?>
 				<tr data-idx="<?= $i ?>">
 					<td>
 						<input name="fields[<?= $i ?>]" type="text" placeholder="Код поля"
