@@ -9,10 +9,7 @@ namespace Rodzeta\Feedbackfields;
 
 defined("B_PROLOG_INCLUDED") and (B_PROLOG_INCLUDED === true) or die();
 
-use Bitrix\Main\Loader;
-use Bitrix\Main\EventManager;
-use Bitrix\Main\Config\Option;
-use Bitrix\Main\Web\HttpClient;
+use Bitrix\Main\{Loader, EventManager, Config\Option, Web\HttpClient};
 
 require __DIR__ . "/.init.php";
 
