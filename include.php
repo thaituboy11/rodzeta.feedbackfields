@@ -16,7 +16,33 @@ use Bitrix\Main\Web\HttpClient;
 
 require __DIR__ . "/.init.php";
 
-//...
+EventManager::getInstance()->addEventHandler("main", "OnPanelCreate", function () {
+	// TODO заменить на определение доступа к редактированию конента
+	if (!$GLOBALS["USER"]->IsAdmin()) {
+	  return;
+	}
+
+	$link = "javascript:" . $GLOBALS["APPLICATION"]->GetPopupLink([
+		"URL" => URL_ADMIN,
+		"PARAMS" => [
+			"resizable" => true,
+			//"width" => 780,
+			//"height" => 570,
+			//"min_width" => 400,
+			//"min_height" => 200,
+			"buttons" => "[BX.CDialog.prototype.btnClose]"
+		]
+	]);
+  $GLOBALS["APPLICATION"]->AddPanelButton([
+		"HREF" => $link,
+		"ICON"  => "bx-panel-site-structure-icon",
+		//"SRC" => URL_ADMIN . "/icon.gif",
+		"TEXT"  => "Доп. поля форм",
+		"ALT" => "Доп. поля форм",
+		"MAIN_SORT" => 2000,
+		"SORT"      => 100
+	]);
+});
 
 EventManager::getInstance()->addEventHandler("main", "OnBeforeEventAdd",
 	function (&$event, &$lid, &$arFields, &$message_id, &$files) {

@@ -7,16 +7,40 @@
 
 namespace Rodzeta\Feedbackfields;
 
+define(__NAMESPACE__ . "\ID", "rodzeta.feedbackfields");
+define(__NAMESPACE__ . "\URL_ADMIN", "/bitrix/admin/" . ID . "/");
 define(__NAMESPACE__ . "\APP", __DIR__ . "/");
 define(__NAMESPACE__ . "\LIB", __DIR__  . "/lib/");
-define(__NAMESPACE__ . "\FILE_OPTIONS", "/upload/.rodzeta.feedbackfields.php");
-define(__NAMESPACE__ . "\FILE_FORMS", "/upload/.rodzeta.feedbackfields.csv");
+
 define(__NAMESPACE__ . "\EVENT_FEEDBACK_FORM", "FEEDBACK_FORM");
+
+define(__NAMESPACE__ . "\FILE_OPTIONS", "/upload/.rodzeta.feedbackfields.php");
+
+define(__NAMESPACE__ . "\FILE_FORMS", "/upload/.rodzeta.feedbackfields.csv");
+
+//define(__NAMESPACE__ . "\FILE_OPTIONS",
+//	$_SERVER["DOCUMENT_ROOT"] . "/upload/" . $_SERVER["SERVER_NAME"] . "/." . ID);
+
+//define(__NAMESPACE__ . "\FILE_JS",
+//	"/upload/" . $_SERVER["SERVER_NAME"] . "/" . ID . ".js");
 
 require LIB . "encoding/php-array.php";
 
-use Bitrix\Main\Loader;
-use Bitrix\Main\Config\Option;
+/*
+function StorageInit() {
+	$path = dirname(FILE_OPTIONS);
+	if (!is_dir($path)) {
+		mkdir($path, 0700, true);
+	}
+}
+
+function AppendValues($data, $n, $v) {
+	yield from $data;
+	for ($i = 0; $i < $n; $i++) {
+		yield  $v;
+	}
+}
+*/
 
 function CreateCache($options) {
 	$basePath = $_SERVER["DOCUMENT_ROOT"];
