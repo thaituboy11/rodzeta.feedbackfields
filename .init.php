@@ -24,9 +24,8 @@ require LIB . "encoding/php-array.php";
 require LIB . "options.php";
 
 function StorageInit() {
-	$path = CONFIG;
-	if (!is_dir($path)) {
-		mkdir($path, 0700, true);
+	if (!is_dir(CONFIG)) {
+		mkdir(CONFIG, 0700, true);
 	}
 }
 /*
