@@ -30,16 +30,17 @@ $request = $context->getRequest();
 
 $formSaved = check_bitrix_sessid() && $request->isPost();
 if ($formSaved) {
-	//Update($optionsKey, $request->getPostList());
+	echo "<pre>"; print_r($request->getPostList()); echo "</pre>";
+	//Update($request->getPostList());
 }
 
 $config = Config();
-$currentOptions = AppendValues($config["fields"], 5, ""); //Select();
-$currentOptions = array_unique(array_merge([
-	"USER_REGION",
-	"USER_PHONE",
-	"USER_SITE",
-], $currentOptions));
+$currentOptions = []; //$config["fields"]; //Select();
+$currentOptions = array_merge([
+	"USER_REGION" => ["USER_REGION", "Регион"],
+	"USER_PHONE" => ["USER_PHONE", "Телефон"],
+	"USER_SITE" => ["USER_SITE", "Сайт"],
+], $currentOptions);
 
 ?>
 
@@ -50,11 +51,19 @@ $currentOptions = array_unique(array_merge([
 
 	<table width="100%" class="js-table-autoappendrows">
 		<tbody>
-			<?php foreach ($currentOptions as $i => $fieldCode) { ?>
+			<?php $i = 0; foreach (AppendValues($currentOptions, 5, ["", ""]) as $i => $field) { $i++; ?>
 				<tr data-idx="<?= $i ?>">
 					<td>
-						<input name="fields[<?= $i ?>]" type="text" placeholder="Код поля"
-							value="<?= htmlspecialcharsex($fieldCode) ?>">
+						<input type="text" placeholder="Код поля"
+							name="fields[<?= $i ?>][0]"
+							value="<?= htmlspecialcharsex($field[0]) ?>"
+							style="width:96%;">
+					</td>
+					<td>
+						<input type="text" placeholder="Название поля"
+							name="fields[<?= $i ?>][1]"
+							value="<?= htmlspecialcharsex($field[1]) ?>"
+							style="width:96%;">
 					</td>
 				</tr>
 			<?php } ?>
