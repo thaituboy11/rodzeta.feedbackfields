@@ -10,12 +10,22 @@ namespace Rodzeta\Feedbackfields\Options;
 use const \Rodzeta\Feedbackfields\CONFIG;
 
 function Update($data) {
-	echo "<pre>"; var_dump(CONFIG, $data["fields"]); echo "</pre>";
-
-	//\Encoding\PhpArray\Write(FILE_OPTIONS . "/options.php", $options);
+	$fields = [];
+	foreach ($data["fields"] as $row) {
+		$row = array_map("trim", $row);
+		if ($row[0] != "") {
+			$fields[$row[0]] = $row;
+		}
+	}
+	\Encoding\PhpArray\Write(CONFIG . "options.php", [
+		"fields" => $fields,
+		//...
+	]);
 }
 
 function Select() {
-	$fname = CONFIG . "/options.php";
-	return is_readable($fname)? include $fname : [];
+	$fname = CONFIG . "options.php";
+	return is_readable($fname)? include $fname : [
+		"fields" => [],
+	];
 }

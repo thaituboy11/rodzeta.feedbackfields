@@ -12,12 +12,11 @@ define(__NAMESPACE__ . "\URL_ADMIN", "/bitrix/admin/" . ID . "/");
 define(__NAMESPACE__ . "\APP", __DIR__ . "/");
 define(__NAMESPACE__ . "\LIB", __DIR__  . "/lib/");
 define(__NAMESPACE__ . "\CONFIG",
-	$_SERVER["DOCUMENT_ROOT"] . "/upload/" . $_SERVER["SERVER_NAME"] . "/." . ID);
+	$_SERVER["DOCUMENT_ROOT"] . "/upload/" . $_SERVER["SERVER_NAME"] . "/." . ID . "/");
 
 define(__NAMESPACE__ . "\EVENT_FEEDBACK_FORM", "FEEDBACK_FORM");
 
 define(__NAMESPACE__ . "\FILE_OPTIONS", "/upload/.rodzeta.feedbackfields.php");
-
 define(__NAMESPACE__ . "\FILE_FORMS", "/upload/.rodzeta.feedbackfields.csv");
 
 require LIB . "encoding/php-array.php";

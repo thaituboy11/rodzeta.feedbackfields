@@ -34,13 +34,13 @@ if ($formSaved) {
 	Options\Update($request->getPostList());
 }
 
-$currentOptions = array_merge(
+$fields = array_merge(
 	[
 		"USER_REGION" => ["USER_REGION", "Регион"],
 		"USER_PHONE" => ["USER_PHONE", "Телефон"],
 		"USER_SITE" => ["USER_SITE", "Сайт"],
 	],
-	Options\Select()
+	Options\Select()["fields"]
 );
 
 ?>
@@ -52,7 +52,7 @@ $currentOptions = array_merge(
 
 	<table width="100%" class="js-table-autoappendrows">
 		<tbody>
-			<?php $i = 0; foreach (AppendValues($currentOptions, 5, ["", ""]) as $i => $field) { $i++; ?>
+			<?php $i = 0; foreach (AppendValues($fields, 5, ["", ""]) as $i => $field) { $i++; ?>
 				<tr data-idx="<?= $i ?>">
 					<td>
 						<input type="text" placeholder="Код поля"
