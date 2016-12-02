@@ -26,14 +26,13 @@ define(__NAMESPACE__ . "\FILE_FORMS", "/upload/.rodzeta.feedbackfields.csv");
 
 require LIB . "encoding/php-array.php";
 
-/*
 function StorageInit() {
 	$path = dirname(FILE_OPTIONS);
 	if (!is_dir($path)) {
 		mkdir($path, 0700, true);
 	}
 }
-
+/*
 function AppendValues($data, $n, $v) {
 	yield from $data;
 	for ($i = 0; $i < $n; $i++) {
