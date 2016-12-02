@@ -26,7 +26,7 @@ $app = Application::getInstance();
 $context = $app->getContext();
 $request = $context->getRequest();
 
-StorageInit();
+//StorageInit();
 
 $formSaved = check_bitrix_sessid() && $request->isPost();
 if ($formSaved) {
