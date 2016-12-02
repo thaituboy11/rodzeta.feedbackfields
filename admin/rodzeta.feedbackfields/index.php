@@ -7,7 +7,7 @@
 
 namespace Rodzeta\Feedbackfields;
 
-use Bitrix\Main\{Application, Config\Option, Localization\Loc};
+use Bitrix\Main\{Application, Localization\Loc};
 
 require $_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_admin_before.php";
 //require $_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php";
@@ -34,13 +34,14 @@ if ($formSaved) {
 	Options\Update($request->getPostList());
 }
 
-$fields = array_merge(
+$currentOptions = Options\Select();
+$currentOptions["fields"] = array_merge(
 	[
 		"USER_REGION" => ["USER_REGION", "Регион"],
 		"USER_PHONE" => ["USER_PHONE", "Телефон"],
 		"USER_SITE" => ["USER_SITE", "Сайт"],
 	],
-	Options\Select()["fields"]
+	$currentOptions
 );
 
 ?>
@@ -52,7 +53,7 @@ $fields = array_merge(
 
 	<table width="100%" class="js-table-autoappendrows">
 		<tbody>
-			<?php $i = 0; foreach (AppendValues($fields, 5, ["", ""]) as $i => $field) { $i++; ?>
+			<?php $i = 0; foreach (AppendValues($currentOptions["fields"], 5, ["", ""]) as $i => $field) { $i++; ?>
 				<tr data-idx="<?= $i ?>">
 					<td>
 						<input type="text" placeholder="Код поля"
@@ -71,6 +72,37 @@ $fields = array_merge(
 		</tbody>
 	</table>
 
+	<br>
+	<div class="adm-detail-title">Данные Bitrix24</div>
+
+	<table width="100%">
+		<tr>
+			<td>
+				<input type="text" size="30" name="bitrix24_portal_url"
+					value="<?= htmlspecialcharsex($currentOptions["bitrix24"]["portal_url"]) ?>"
+					style="width:96%;"
+					placeholder="Адрес портала Bitrix24">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="text" size="30" name="bitrix24_login"
+					value="<?= htmlspecialcharsex($currentOptions["bitrix24"]["login"]) ?>"
+					style="width:96%;"
+					placeholder='LOGIN пользователя-"лидогенератора"'>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input name="bitrix24_password" size="30" type="password"
+					style="width:96%;"
+					readonly
+	    		onfocus="this.removeAttribute('readonly')"
+	    		value="<?= htmlspecialcharsex($currentOptions["bitrix24"]["password"]) ?>"
+	    		placeholder='PASSWORD пользователя-"лидогенератора"'>
+			</td>
+		</tr>
+	</table>
 
 </form>
 

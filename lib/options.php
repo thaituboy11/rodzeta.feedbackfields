@@ -7,6 +7,8 @@
 
 namespace Rodzeta\Feedbackfields\Options;
 
+use Bitrix\Main\Config\Option;
+
 use const \Rodzeta\Feedbackfields\CONFIG;
 
 function Update($data) {
@@ -19,13 +21,17 @@ function Update($data) {
 	}
 	\Encoding\PhpArray\Write(CONFIG . "options.php", [
 		"fields" => $fields,
-		//...
 	]);
+	Option::set("rodzeta.feedbackfields", $_SERVER["SERVER_NAME"], json_encode([
+		"portal_url" => $data["bitrix24_portal_url"],
+		"login" => $data["bitrix24_login"],
+		"password" => $data["bitrix24_password"],
+	]));
 }
 
 function Select() {
 	$fname = CONFIG . "options.php";
-	return is_readable($fname)? include $fname : [
-		"fields" => [],
-	];
+	$result = is_readable($fname)? include $fname : ["fields" => []];
+	$result["bitrix24"] = json_decode(Option::get("rodzeta.feedbackfields",  $_SERVER["SERVER_NAME"]), true);
+	return $result;
 }
