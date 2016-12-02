@@ -47,7 +47,6 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeEventAdd",
 		if ($event != EVENT_FEEDBACK_FORM) {
 			return;
 		}
-		// TODO get fields by $message_id
 		foreach (Options\Select()["fields"] as $code => $field) {
 			if (isset($_POST[$code])) {
 				$arFields[$code] = filter_var($_POST[$code], FILTER_SANITIZE_STRING);
@@ -55,6 +54,14 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeEventAdd",
 		}
 	}
 );
+
+EventManager::getInstance()->addEventHandler("main", "OnBeforeEventSend", function (&$arFields, &$arTemplate) {
+	// check event type
+	if ($arTemplate["EVENT_NAME"] != EVENT_FEEDBACK_FORM) {
+		return;
+	}
+	FieldsSave($arFields, $arTemplate);
+});
 
 /*
 EventManager::getInstance()->addEventHandler("main", "OnAdminTabControlBegin",
@@ -123,18 +130,6 @@ EventManager::getInstance()->addEventHandler("main", "OnAdminTabControlBegin",
 	}
 );
 */
-
-if (Option::get("rodzeta.feedbackfields", "save_form_data") == "Y") {
-
-	EventManager::getInstance()->addEventHandler("main", "OnBeforeEventSend", function (&$arFields, &$arTemplate) {
-		// check event type
-		if ($arTemplate["EVENT_NAME"] != EVENT_FEEDBACK_FORM) {
-			return;
-		}
-		SaveFields($arFields, $arTemplate);
-	});
-
-}
 
 if (Option::get("rodzeta.feedbackfields", "import_to_bitrix24") == "Y") {
 

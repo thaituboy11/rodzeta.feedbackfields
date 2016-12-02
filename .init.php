@@ -11,13 +11,15 @@ define(__NAMESPACE__ . "\ID", "rodzeta.feedbackfields");
 define(__NAMESPACE__ . "\URL_ADMIN", "/bitrix/admin/" . ID . "/");
 define(__NAMESPACE__ . "\APP", __DIR__ . "/");
 define(__NAMESPACE__ . "\LIB", __DIR__  . "/lib/");
+
 define(__NAMESPACE__ . "\CONFIG",
 	$_SERVER["DOCUMENT_ROOT"] . "/upload/" . $_SERVER["SERVER_NAME"] . "/." . ID . "/");
+define(__NAMESPACE__ . "\FILE_FORMS", CONFIG . ".form_results.csv");
 
 define(__NAMESPACE__ . "\EVENT_FEEDBACK_FORM", "FEEDBACK_FORM");
 
+// TODO remove
 define(__NAMESPACE__ . "\FILE_OPTIONS", "/upload/.rodzeta.feedbackfields.php");
-define(__NAMESPACE__ . "\FILE_FORMS", "/upload/.rodzeta.feedbackfields.csv");
 
 require LIB . "encoding/php-array.php";
 require LIB . "options.php";
@@ -35,6 +37,7 @@ function AppendValues($data, $n, $v) {
 	}
 }
 
+/*
 function CreateCache($options) {
 	$basePath = $_SERVER["DOCUMENT_ROOT"];
 
@@ -54,25 +57,33 @@ function CreateCache($options) {
 
 	\Encoding\PhpArray\Write($basePath . FILE_OPTIONS, $options);
 }
+*/
 
+// TODO remove
 function Config() {
 	return include $_SERVER["DOCUMENT_ROOT"] . FILE_OPTIONS;
 }
 
-function SaveFields($arFields, $arTemplate) {
-	$config = Config();
-	if (empty($config["fields_to_file"])) {
-		return;
+function FieldsSave($arFields, $arTemplate) {
+	$fields = [
+		"AUTHOR" => ["AUTHOR", "AUTHOR", "Y"],
+		"AUTHOR_EMAIL" => ["AUTHOR_EMAIL", "AUTHOR_EMAIL", "Y"],
+		"TEXT" => ["TEXT", "TEXT", "Y"],
+	];
+	foreach (Options\Select()["fields"] as $field) {
+		if ($field[2] == "Y") {
+			$fields[$field[0]] = $field;
+		}
 	}
 	$row = [
 		date("Y-m-d H:i:s"),
 		$arTemplate["ID"],
 		$arTemplate["SUBJECT"],
 	];
-	foreach ($config["fields_to_file"] as $code) {
+	foreach ($fields as $code => $v) {
 		$row[] = isset($arFields[$code])? $arFields[$code] : "";
 	}
-	$fp = fopen($_SERVER["DOCUMENT_ROOT"] . FILE_FORMS, "a");
+	$fp = fopen(FILE_FORMS, "a");
 	if ($fp) {
 		fputcsv($fp, $row, "\t");
 		fclose($fp);
