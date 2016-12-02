@@ -5,3 +5,4 @@ $MESS["RODZETA_FEEDBACKFIELDS_MODULE_NAME"] = "Дополнительные по
 $MESS["RODZETA_FEEDBACKFIELDS_MODULE_DESCRIPTION"] = "Данный модуль позволяет добавлять дополнительные поля в событие отправки форм стандартного компонента Форма обратной связи и сохранять данные форм";
 
 $MESS["RODZETA_REQUIREMENTS_PHP_VERSION"] = "Необходима версия PHP 7 или выше";
+$MESS["RODZETA_REQUIREMENTS_BITRIX_UTF8"] = "Bitrix должен быть установлен в кодировке UTF-8";

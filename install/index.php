@@ -7,7 +7,7 @@
 
 // NOTE this file must compatible with php 5.3
 
-defined('B_PROLOG_INCLUDED') and (B_PROLOG_INCLUDED === true) or die();
+defined("B_PROLOG_INCLUDED") and (B_PROLOG_INCLUDED === true) or die();
 
 use Bitrix\Main\Application;
 use Bitrix\Main\Loader;
@@ -52,19 +52,29 @@ class rodzeta_feedbackfields extends CModule {
 	}
 
 	function InstallFiles() {
-		// copy example if not exists
-		$fname = $_SERVER["DOCUMENT_ROOT"] . "/upload/." . $this->MODULE_ID . ".php";
-		if (!file_exists($fname)) {
-			copy($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/" . $this->MODULE_ID . "/install/data/." . $this->MODULE_ID . ".php", $fname);
-		}
+		CopyDirFiles(
+			$_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/" . $this->MODULE_ID . "/install/admin/" . $this->MODULE_ID,
+			$_SERVER["DOCUMENT_ROOT"] . "/bitrix/admin/" . $this->MODULE_ID,
+			true, true
+		);
 
 		return true;
 	}
 
+	function UninstallFiles() {
+		DeleteDirFilesEx("/bitrix/admin/" . $this->MODULE_ID);
+		return true;
+	}
+
 	function DoInstall() {
-		if (version_compare(PHP_VERSION, '7', '<')) {
-			global $APPLICATION;
-   		$APPLICATION->ThrowException(Loc::getMessage("RODZETA_REQUIREMENTS_PHP_VERSION"));
+		// check module requirements
+		global $APPLICATION;
+		if (version_compare(PHP_VERSION, "7", "<")) {
+			$APPLICATION->ThrowException(Loc::getMessage("RODZETA_REQUIREMENTS_PHP_VERSION"));
+			return false;
+		}
+		if (!defined("BX_UTF")) {
+			$APPLICATION->ThrowException(Loc::getMessage("RODZETA_REQUIREMENTS_BITRIX_UTF8"));
 			return false;
 		}
 
@@ -74,6 +84,7 @@ class rodzeta_feedbackfields extends CModule {
 	}
 
 	function DoUninstall() {
+		$this->UninstallFiles();
 		UnRegisterModuleDependences("main", "OnPageStart", $this->MODULE_ID);
 		ModuleManager::unregisterModule($this->MODULE_ID);
 	}
