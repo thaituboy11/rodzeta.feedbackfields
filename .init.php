@@ -11,6 +11,8 @@ define(__NAMESPACE__ . "\ID", "rodzeta.feedbackfields");
 define(__NAMESPACE__ . "\URL_ADMIN", "/bitrix/admin/" . ID . "/");
 define(__NAMESPACE__ . "\APP", __DIR__ . "/");
 define(__NAMESPACE__ . "\LIB", __DIR__  . "/lib/");
+define(__NAMESPACE__ . "\CONFIG",
+	$_SERVER["DOCUMENT_ROOT"] . "/upload/" . $_SERVER["SERVER_NAME"] . "/." . ID);
 
 define(__NAMESPACE__ . "\EVENT_FEEDBACK_FORM", "FEEDBACK_FORM");
 
@@ -18,16 +20,11 @@ define(__NAMESPACE__ . "\FILE_OPTIONS", "/upload/.rodzeta.feedbackfields.php");
 
 define(__NAMESPACE__ . "\FILE_FORMS", "/upload/.rodzeta.feedbackfields.csv");
 
-//define(__NAMESPACE__ . "\FILE_OPTIONS",
-//	$_SERVER["DOCUMENT_ROOT"] . "/upload/" . $_SERVER["SERVER_NAME"] . "/." . ID);
-
-//define(__NAMESPACE__ . "\FILE_JS",
-//	"/upload/" . $_SERVER["SERVER_NAME"] . "/" . ID . ".js");
-
 require LIB . "encoding/php-array.php";
+require LIB . "options.php";
 
 function StorageInit() {
-	$path = dirname(FILE_OPTIONS);
+	$path = CONFIG;
 	if (!is_dir($path)) {
 		mkdir($path, 0700, true);
 	}

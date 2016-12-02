@@ -26,22 +26,22 @@ $app = Application::getInstance();
 $context = $app->getContext();
 $request = $context->getRequest();
 
-//StorageInit();
+StorageInit();
 
 $formSaved = check_bitrix_sessid() && $request->isPost();
 if ($formSaved) {
 	$data = $request->getPostList();
-	echo "<pre>"; print_r($data["fields"]); echo "</pre>";
-	//Update($request->getPostList());
+	Options\Update($request->getPostList());
 }
 
-$config = Config();
-$currentOptions = []; //$config["fields"]; //Select();
-$currentOptions = array_merge([
-	"USER_REGION" => ["USER_REGION", "Регион"],
-	"USER_PHONE" => ["USER_PHONE", "Телефон"],
-	"USER_SITE" => ["USER_SITE", "Сайт"],
-], $currentOptions);
+$currentOptions = array_merge(
+	[
+		"USER_REGION" => ["USER_REGION", "Регион"],
+		"USER_PHONE" => ["USER_PHONE", "Телефон"],
+		"USER_SITE" => ["USER_SITE", "Сайт"],
+	],
+	Options\Select()
+);
 
 ?>
 
