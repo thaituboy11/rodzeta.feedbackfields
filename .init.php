@@ -28,14 +28,13 @@ function StorageInit() {
 		mkdir(CONFIG, 0700, true);
 	}
 }
-/*
+
 function AppendValues($data, $n, $v) {
 	yield from $data;
 	for ($i = 0; $i < $n; $i++) {
 		yield  $v;
 	}
 }
-*/
 
 function CreateCache($options) {
 	$basePath = $_SERVER["DOCUMENT_ROOT"];
@@ -59,13 +58,6 @@ function CreateCache($options) {
 
 function Config() {
 	return include $_SERVER["DOCUMENT_ROOT"] . FILE_OPTIONS;
-}
-
-function AppendValues($data, $n, $v) {
-	for ($i = 0; $i < $n; $i++) {
-		$data[] = $v;
-	}
-	return $data;
 }
 
 function SaveFields($arFields, $arTemplate) {
