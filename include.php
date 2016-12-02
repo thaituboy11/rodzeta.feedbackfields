@@ -7,14 +7,16 @@
 
 namespace Rodzeta\Feedbackfields;
 
-defined('B_PROLOG_INCLUDED') and (B_PROLOG_INCLUDED === true) or die();
+defined("B_PROLOG_INCLUDED") and (B_PROLOG_INCLUDED === true) or die();
+
+use Bitrix\Main\Loader;
+use Bitrix\Main\EventManager;
+use Bitrix\Main\Config\Option;
+use Bitrix\Main\Web\HttpClient;
 
 require __DIR__ . "/.init.php";
 
-use \Bitrix\Main\Loader;
-use \Bitrix\Main\EventManager;
-use \Bitrix\Main\Config\Option;
-use \Bitrix\Main\Web\HttpClient;
+//...
 
 EventManager::getInstance()->addEventHandler("main", "OnBeforeEventAdd",
 	function (&$event, &$lid, &$arFields, &$message_id, &$files) {
