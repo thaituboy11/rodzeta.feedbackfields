@@ -41,7 +41,7 @@ $currentOptions["fields"] = array_merge(
 		"USER_PHONE" => ["USER_PHONE", "Телефон"],
 		"USER_SITE" => ["USER_SITE", "Сайт"],
 	],
-	$currentOptions
+	$currentOptions["fields"]
 );
 
 ?>

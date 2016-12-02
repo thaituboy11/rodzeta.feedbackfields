@@ -47,6 +47,7 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeEventAdd",
 		if ($event != EVENT_FEEDBACK_FORM) {
 			return;
 		}
+		// TODO get config by $message_id
 		foreach (Config()["fields"] as $code) {
 			if (isset($_POST[$code])) {
 				$arFields[$code] = filter_var($_POST[$code], FILTER_SANITIZE_STRING);
