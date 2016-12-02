@@ -30,7 +30,8 @@ $request = $context->getRequest();
 
 $formSaved = check_bitrix_sessid() && $request->isPost();
 if ($formSaved) {
-	echo "<pre>"; print_r($request->getPostList()); echo "</pre>";
+	$data = $request->getPostList();
+	echo "<pre>"; print_r($data["fields"]); echo "</pre>";
 	//Update($request->getPostList());
 }
 
