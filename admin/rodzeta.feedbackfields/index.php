@@ -67,6 +67,14 @@ $currentOptions["fields"] = array_merge(
 							value="<?= htmlspecialcharsex($field[1]) ?>"
 							style="width:96%;">
 					</td>
+					<td>
+						<?php if ($field[0] != "") { ?>
+							<input type="checkbox" style="margin-top:6px;"
+								title="Добавлять в CSV"
+								name="fields[<?= $i ?>][2]"
+								value="Y" <?= $field[2] == "Y"? "checked" : "" ?>>
+						<?php } ?>
+					</td>
 				</tr>
 			<?php } ?>
 		</tbody>
