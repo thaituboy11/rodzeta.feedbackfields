@@ -18,9 +18,6 @@ define(__NAMESPACE__ . "\FILE_FORMS", CONFIG . ".form_results.csv");
 
 define(__NAMESPACE__ . "\EVENT_FEEDBACK_FORM", "FEEDBACK_FORM");
 
-// TODO remove
-define(__NAMESPACE__ . "\FILE_OPTIONS", "/upload/.rodzeta.feedbackfields.php");
-
 require LIB . "encoding/php-array.php";
 require LIB . "options.php";
 
