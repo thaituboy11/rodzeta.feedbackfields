@@ -135,7 +135,7 @@ $currentOptions["fields"] = array_merge(
 	</table>
 
 	<p>
-		&nbsp;&nbsp;&nbsp;<b>Путь к CSV файлу:</b>
+		&nbsp;&nbsp;&nbsp;Путь к CSV файлу:
 		<?= str_replace($_SERVER["DOCUMENT_ROOT"], "", FILE_FORMS) ?>
 	</p>
 
