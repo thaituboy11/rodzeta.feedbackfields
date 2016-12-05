@@ -43,11 +43,9 @@ function Config() {
 }
 
 function FieldsSave($arFields, $arTemplate) {
-	$fields = [];
-	foreach (Options\Select()["fields"] as $field) {
-		if ($field[2] == "Y") {
-			$fields[$field[0]] = $field;
-		}
+	$fields = Options\Select()["fields_csv"];
+	if (empty($fields)) {
+		return;
 	}
 	$row = [
 		date("Y-m-d H:i:s"),
