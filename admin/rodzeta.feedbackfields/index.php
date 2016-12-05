@@ -37,6 +37,10 @@ if ($formSaved) {
 $currentOptions = Options\Select();
 $currentOptions["fields"] = array_merge(
 	[
+		"AUTHOR" => ["AUTHOR", "Ваше имя"],
+		"AUTHOR_EMAIL" => ["AUTHOR_EMAIL", "Ваш e-mail"],
+		"TEXT" => ["TEXT", "Ваше сообщение"],
+		//
 		"USER_REGION" => ["USER_REGION", "Регион"],
 		"USER_PHONE" => ["USER_PHONE", "Телефон"],
 		"USER_SITE" => ["USER_SITE", "Сайт"],
@@ -53,13 +57,19 @@ $currentOptions["fields"] = array_merge(
 
 	<table width="100%" class="js-table-autoappendrows">
 		<tbody>
-			<?php $i = 0; foreach (AppendValues($currentOptions["fields"], 5, ["", ""]) as $i => $field) { $i++; ?>
+			<?php
+				$i = 0;
+				foreach (AppendValues($currentOptions["fields"], 5, ["", ""]) as $i => $field) { $i++;
+					$readonly = ($field[0] == "AUTHOR"
+						|| $field[0] == "AUTHOR_EMAIL"
+						|| $field[0] == "TEXT")? "readonly" : "";
+			?>
 				<tr data-idx="<?= $i ?>">
 					<td>
 						<input type="text" placeholder="Код поля"
 							name="fields[<?= $i ?>][0]"
 							value="<?= htmlspecialcharsex($field[0]) ?>"
-							style="width:96%;">
+							<?= $readonly ?> style="width:96%;">
 					</td>
 					<td>
 						<input type="text" placeholder="Название поля"
@@ -73,13 +83,59 @@ $currentOptions["fields"] = array_merge(
 							name="fields[<?= $i ?>][2]"
 							value="Y" <?= $field[2] == "Y"? "checked" : "" ?>>
 					</td>
+					<td>
+						<select name="fields[<?= $i ?>][3]" style="width:96%;">
+							<option value="">Код поля для лида Bitrix24</option>
+							<?php foreach ([
+										"COMPANY_TITLE",
+										"NAME",
+										"LAST_NAME",
+										"SECOND_NAME",
+										"POST",
+										"ADDRESS",
+										"COMMENTS",
+										"SOURCE_DESCRIPTION",
+										"STATUS_DESCRIPTION",
+										"OPPORTINUTY",
+										"CURRENCY_ID",
+										"PRODUCT_ID",
+										"SOURCE_ID",
+										"STATUS_ID",
+										"ASSIGNED_BY_ID",
+										"PHONE_WORK",
+										"PHONE_MOBILE",
+										"PHONE_FAX",
+										"PHONE_HOME",
+										"PHONE_PAGER",
+										"PHONE_OTHER",
+										"WEB_WORK",
+										"WEB_HOME",
+										"WEB_FACEBOOK",
+										"WEB_LIVEJOURNAL",
+										"WEB_TWITTER",
+										"WEB_OTHER",
+										"EMAIL_WORK",
+										"EMAIL_HOME",
+										"EMAIL_OTHER",
+										"IM_SKYPE",
+										"IM_ICQ",
+										"IM_MSN",
+										"IM_JABBER",
+										"IM_OTHER",
+									] as $lidFieldCode) { ?>
+								<option value="<?= $lidFieldCode ?>"
+									<?= $lidFieldCode == $field[3]?
+										"selected" : "" ?>><?= $lidFieldCode ?></option>
+							<?php } ?>
+						</select>
+					</td>
 				</tr>
 			<?php } ?>
 		</tbody>
 	</table>
 
 	<br>
-	<div class="adm-detail-title">Данные Bitrix24</div>
+	<div class="adm-detail-title">Данные аккаунта Bitrix24</div>
 
 	<table width="100%">
 		<tr>
