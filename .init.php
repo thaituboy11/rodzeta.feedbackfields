@@ -65,11 +65,7 @@ function Config() {
 }
 
 function FieldsSave($arFields, $arTemplate) {
-	$fields = [
-		"AUTHOR" => ["AUTHOR", "AUTHOR", "Y"],
-		"AUTHOR_EMAIL" => ["AUTHOR_EMAIL", "AUTHOR_EMAIL", "Y"],
-		"TEXT" => ["TEXT", "TEXT", "Y"],
-	];
+	$fields = [];
 	foreach (Options\Select()["fields"] as $field) {
 		if ($field[2] == "Y") {
 			$fields[$field[0]] = $field;
