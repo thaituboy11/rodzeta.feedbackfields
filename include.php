@@ -47,7 +47,7 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeEventAdd",
 		if ($event != EVENT_FEEDBACK_FORM) {
 			return;
 		}
-		foreach (Options\Select()["fields"] as $code => $field) {
+		foreach (Options\Select()["fields_csv"] as $code => $v) {
 			if (isset($_POST[$code])) {
 				$arFields[$code] = filter_var($_POST[$code], FILTER_SANITIZE_STRING);
 			}
