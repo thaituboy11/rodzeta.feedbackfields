@@ -63,34 +63,32 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeEventSend", functi
 	FieldsSave($arFields, $arTemplate);
 });
 
-if (Option::get("rodzeta.feedbackfields", "import_to_bitrix24") == "Y") {
-
-	EventManager::getInstance()->addEventHandler("main", "OnBeforeEventSend",
-		function (&$arFields, &$arTemplate) {
-			// check event type
-			if ($arTemplate["EVENT_NAME"] != EVENT_FEEDBACK_FORM) {
-				return;
-			}
-
-			$client = new HttpClient();
-			$postData = [
-				"LOGIN" => Option::get("rodzeta.feedbackfields", "bitrix24_login"),
-				"PASSWORD" => Option::get("rodzeta.feedbackfields", "bitrix24_password"),
-				"TITLE" => $arTemplate["SUBJECT"],
-			];
-			foreach (Config()["fields_to_bitrix24"] as $dest => $src) {
-				if (isset($arFields[$src])) {
-					$postData[$dest] = $arFields[$src];
-				}
-			}
-			$response = $client->post(
-				"https://" . Option::get("rodzeta.feedbackfields", "bitrix24_portal_url") . "/crm/configs/import/lead.php",
-				$postData
-			);
+EventManager::getInstance()->addEventHandler("main", "OnBeforeEventSend",
+	function (&$arFields, &$arTemplate) {
+		// check event type
+		if ($arTemplate["EVENT_NAME"] != EVENT_FEEDBACK_FORM) {
+			return;
 		}
-	);
-}
 
+		$client = new HttpClient();
+		$postData = [
+			"LOGIN" => Option::get("rodzeta.feedbackfields", "bitrix24_login"),
+			"PASSWORD" => Option::get("rodzeta.feedbackfields", "bitrix24_password"),
+			"TITLE" => $arTemplate["SUBJECT"],
+		];
+		foreach (Config()["fields_to_bitrix24"] as $dest => $src) {
+			if (isset($arFields[$src])) {
+				$postData[$dest] = $arFields[$src];
+			}
+		}
+		$response = $client->post(
+			"https://" . Option::get("rodzeta.feedbackfields", "bitrix24_portal_url") . "/crm/configs/import/lead.php",
+			$postData
+		);
+	}
+);
+
+/*
 if (Option::get("rodzeta.feedbackfields", "use_redirect") == "Y"
 		&& trim(Option::get("rodzeta.feedbackfields", "redirect_url")) != "") {
 
@@ -102,3 +100,4 @@ if (Option::get("rodzeta.feedbackfields", "use_redirect") == "Y"
 	});
 
 }
+*/
