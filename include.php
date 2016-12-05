@@ -70,6 +70,11 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeEventSend",
 			return;
 		}
 		$currentOptions = Options\Select();
+		if ($currentOptions["bitrix24"]["portal_url"] == ""
+				|| $currentOptions["bitrix24"]["login"] == ""
+				|| $currentOptions["bitrix24"]["password"] == "") {
+			return;
+		}
 		$client = new HttpClient();
 		$postData = [
 			"LOGIN" => $currentOptions["bitrix24"]["login"],
