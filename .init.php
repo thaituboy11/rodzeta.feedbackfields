@@ -37,11 +37,6 @@ function AppendValues($data, $n, $v) {
 	}
 }
 
-// TODO remove
-function Config() {
-	return include $_SERVER["DOCUMENT_ROOT"] . FILE_OPTIONS;
-}
-
 function FieldsSave($arFields, $arTemplate) {
 	$fields = Options\Select()["fields_csv"];
 	if (empty($fields)) {
