@@ -69,7 +69,6 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeEventSend",
 		if ($arTemplate["EVENT_NAME"] != EVENT_FEEDBACK_FORM) {
 			return;
 		}
-
 		$currentOptions = Options\Select();
 		$client = new HttpClient();
 		$postData = [
