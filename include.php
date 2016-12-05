@@ -70,19 +70,26 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeEventSend",
 			return;
 		}
 
+		$currentOptions = Options\Select();
 		$client = new HttpClient();
 		$postData = [
-			"LOGIN" => Option::get("rodzeta.feedbackfields", "bitrix24_login"),
-			"PASSWORD" => Option::get("rodzeta.feedbackfields", "bitrix24_password"),
+			"LOGIN" => $currentOptions["bitrix24"]["login"],
+			"PASSWORD" => $currentOptions["bitrix24"]["password"],
 			"TITLE" => $arTemplate["SUBJECT"],
 		];
-		foreach (Config()["fields_to_bitrix24"] as $dest => $src) {
-			if (isset($arFields[$src])) {
-				$postData[$dest] = $arFields[$src];
+		foreach ($currentOptions["fields_bitrix24"] as $dest => $src) {
+			$tmp = [];
+			// collect all input values for bitrix24 lead field
+			foreach ($src as $k => $v) {
+				if (isset($arFields[$k])) {
+					$tmp[] = $arFields[$k];
+				}
 			}
+			$postData[$dest] = implode("\n\n", $tmp);
 		}
 		$response = $client->post(
-			"https://" . Option::get("rodzeta.feedbackfields", "bitrix24_portal_url") . "/crm/configs/import/lead.php",
+			"https://" . $currentOptions["bitrix24"]["portal_url"]
+				. "/crm/configs/import/lead.php",
 			$postData
 		);
 	}
