@@ -11,7 +11,7 @@
 
 - данный модуль будет полезен для редакций не включающих модуль Веб-формы (Первый сайт и Старт) и упрощает интеграцию дизайна для разработчика, ускоряет реализацию различных форм - т.к. имеет более простые настройки и гибкие шаблоны;
 - позволяет реализовывать формы с неограниченным количеством полей с использованием стандартного компонента "Форма обратной связи";
-- используется стандартный api для импорта лидов в Bitrix24 https://dev.1c-bitrix.ru/community/blogs/chaos/crm-sozdanie-lidov-iz-drugikh-servisov.php
+- используется стандартный [api для импорта лидов в Bitrix24](https://dev.1c-bitrix.ru/community/blogs/chaos/crm-sozdanie-lidov-iz-drugikh-servisov.php)
 
 ## Описание установки и настройки решения
 
@@ -40,12 +40,12 @@
 
 ## Описание техподдержки и контактных данных
 
-Тех. поддержка и кастомизация оказывается на платной основе, e-mail: rivetweb@yandex.ru
+Тех. поддержка и кастомизация оказывается на платной основе, запросы только по [e-mail](mailto:rivetweb@yandex.ru)
 
-Багрепорты и предложения на https://github.com/rivetweb/bitrix-rodzeta.feedbackfields/issues
+[Багрепорты и предложения](https://github.com/rivetweb/rodzeta.feedbackfields/issues)
 
-Пул реквесты на https://github.com/rivetweb/bitrix-rodzeta.feedbackfields/pulls
+[Пул реквесты](https://github.com/rivetweb/rodzeta.feedbackfields/pulls)
 
 ## Ссылка на демо-версию
 
-http://villa-mia.ru/
+[http://villa-mia.ru/](http://villa-mia.ru/)
