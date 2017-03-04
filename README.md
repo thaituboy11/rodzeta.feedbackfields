@@ -44,8 +44,6 @@
 
 [Багрепорты и предложения](https://github.com/rivetweb/rodzeta.feedbackfields/issues)
 
-[Пул реквесты](https://github.com/rivetweb/rodzeta.feedbackfields/pulls)
-
 ## Ссылка на демо-версию
 
 [http://villa-mia.ru/](http://villa-mia.ru/)
