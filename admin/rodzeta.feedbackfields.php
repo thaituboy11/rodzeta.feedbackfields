@@ -12,7 +12,7 @@ use Bitrix\Main\Localization\Loc;
 
 require $_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_admin_before.php";
 
-// TODO заменить на определение доступа к редактированию контента
+// TODO use rights "can edit content"
 // 	if (!$USER->CanDoOperation("rodzeta.siteoptions"))
 if (!$GLOBALS["USER"]->IsAdmin()) {
 	//$APPLICATION->authForm("ACCESS DENIED");
