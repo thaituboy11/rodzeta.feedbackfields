@@ -7,10 +7,10 @@
 
 namespace Rodzeta\Feedbackfields;
 
-use Bitrix\Main\{Application, Localization\Loc};
+use Bitrix\Main\Application;
+use Bitrix\Main\Localization\Loc;
 
 require $_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_admin_before.php";
-//require $_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php";
 
 // TODO заменить на определение доступа к редактированию контента
 // 	if (!$USER->CanDoOperation("rodzeta.siteoptions"))
@@ -20,31 +20,28 @@ if (!$GLOBALS["USER"]->IsAdmin()) {
 }
 
 Loc::loadMessages(__FILE__);
-//Loc::loadMessages($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/" . ID . "/admin/" . ID . "/index.php");
 
 $app = Application::getInstance();
 $context = $app->getContext();
 $request = $context->getRequest();
 
-StorageInit();
-
 $formSaved = check_bitrix_sessid() && $request->isPost();
 if ($formSaved) {
 	$data = $request->getPostList();
-	Options\Update($request->getPostList());
+	OptionsUpdate($request->getPostList());
 }
 
-$currentOptions = Options\Select();
+$currentOptions = OptionsSelect();
 $currentOptions["fields"] = array_merge(
-	[
-		"AUTHOR" => ["AUTHOR", "Ваше имя"],
-		"AUTHOR_EMAIL" => ["AUTHOR_EMAIL", "Ваш e-mail"],
-		"TEXT" => ["TEXT", "Ваше сообщение"],
+	array(
+		"AUTHOR" => array("AUTHOR", "Ваше имя"),
+		"AUTHOR_EMAIL" => array("AUTHOR_EMAIL", "Ваш e-mail"),
+		"TEXT" => array("TEXT", "Ваше сообщение"),
 		//
-		"USER_REGION" => ["USER_REGION", "Регион"],
-		"USER_PHONE" => ["USER_PHONE", "Телефон"],
-		"USER_SITE" => ["USER_SITE", "Сайт"],
-	],
+		"USER_REGION" => array("USER_REGION", "Регион"),
+		"USER_PHONE" => array("USER_PHONE", "Телефон"),
+		"USER_SITE" => array("USER_SITE", "Сайт"),
+	),
 	$currentOptions["fields"]
 );
 
@@ -59,7 +56,7 @@ $currentOptions["fields"] = array_merge(
 		<tbody>
 			<?php
 				$i = 0;
-				foreach (AppendValues($currentOptions["fields"], 5, ["", ""]) as $i => $field) { $i++;
+				foreach (\Collection\AppendValues($currentOptions["fields"], 5, array("", "")) as $i => $field) { $i++;
 					$readonly = ($field[0] == "AUTHOR"
 						|| $field[0] == "AUTHOR_EMAIL"
 						|| $field[0] == "TEXT")? "readonly" : "";
@@ -86,7 +83,7 @@ $currentOptions["fields"] = array_merge(
 					<td>
 						<select name="fields[<?= $i ?>][3]" style="width:96%;">
 							<option value="">Код поля для лида Bitrix24</option>
-							<?php foreach ([
+							<?php foreach (array(
 										"COMPANY_TITLE",
 										"NAME",
 										"LAST_NAME",
@@ -122,7 +119,7 @@ $currentOptions["fields"] = array_merge(
 										"IM_MSN",
 										"IM_JABBER",
 										"IM_OTHER",
-									] as $lidFieldCode) { ?>
+									) as $lidFieldCode) { ?>
 								<option value="<?= $lidFieldCode ?>"
 									<?= $lidFieldCode == $field[3]?
 										"selected" : "" ?>><?= $lidFieldCode ?></option>
