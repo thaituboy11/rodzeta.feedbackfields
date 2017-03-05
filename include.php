@@ -9,10 +9,11 @@ namespace Rodzeta\Feedbackfields;
 
 defined("B_PROLOG_INCLUDED") and (B_PROLOG_INCLUDED === true) or die();
 
-use Bitrix\Main\Loader;
+use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\EventManager;
-use Bitrix\Main\Config\Option;
 use Bitrix\Main\Web\HttpClient;
+
+Loc::loadMessages(__FILE__);
 
 require __DIR__ . "/lib/.init.php";
 
@@ -36,12 +37,12 @@ function init() {
 		));
 	  $GLOBALS["APPLICATION"]->AddPanelButton(array(
 			"HREF" => $link,
-			"ICON"  => "bx-panel-site-structure-icon",
+			"ICON" => "bx-panel-site-structure-icon",
 			//"SRC" => URL_ADMIN . "/icon.gif",
-			"TEXT"  => "Доп. поля форм",
-			"ALT" => "Доп. поля форм",
+			"TEXT" => Loc::getMessage("RODZETA_FEEDBACKFIELDS_OPTIONS"),
+			"ALT" => Loc::getMessage("RODZETA_FEEDBACKFIELDS_OPTIONS"),
 			"MAIN_SORT" => 2000,
-			"SORT"      => 100
+			"SORT" => 100
 		));
 	});
 

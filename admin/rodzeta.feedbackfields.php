@@ -34,13 +34,13 @@ if ($formSaved) {
 $currentOptions = OptionsSelect();
 $currentOptions["fields"] = array_merge(
 	array(
-		"AUTHOR" => array("AUTHOR", "Ваше имя"),
-		"AUTHOR_EMAIL" => array("AUTHOR_EMAIL", "Ваш e-mail"),
-		"TEXT" => array("TEXT", "Ваше сообщение"),
+		"AUTHOR" => array("AUTHOR", Loc::getMessage("RODZETA_FEEDBACKFIELDS_FIELD_AUTHOR_TITLE")),
+		"AUTHOR_EMAIL" => array("AUTHOR_EMAIL", Loc::getMessage("RODZETA_FEEDBACKFIELDS_FIELD_AUTHOR_EMAIL_TITLE")),
+		"TEXT" => array("TEXT", Loc::getMessage("RODZETA_FEEDBACKFIELDS_FIELD_TEXT_TITLE")),
 		//
-		"USER_REGION" => array("USER_REGION", "Регион"),
-		"USER_PHONE" => array("USER_PHONE", "Телефон"),
-		"USER_SITE" => array("USER_SITE", "Сайт"),
+		"USER_REGION" => array("USER_REGION", Loc::getMessage("RODZETA_FEEDBACKFIELDS_FIELD_USER_REGION_TITLE")),
+		"USER_PHONE" => array("USER_PHONE", Loc::getMessage("RODZETA_FEEDBACKFIELDS_FIELD_USER_PHONE_TITLE")),
+		"USER_SITE" => array("USER_SITE", Loc::getMessage("RODZETA_FEEDBACKFIELDS_FIELD_USER_SITE_TITLE")),
 	),
 	$currentOptions["fields"]
 );
@@ -50,7 +50,7 @@ $currentOptions["fields"] = array_merge(
 <form action="" method="post">
 	<?= bitrix_sessid_post() ?>
 
-	<div class="adm-detail-title">Список кодов для дополнительных полей</div>
+	<div class="adm-detail-title"><?= Loc::getMessage("RODZETA_FEEDBACKFIELDS_TITLE") ?></div>
 
 	<table width="100%" class="js-table-autoappendrows">
 		<tbody>
@@ -63,26 +63,26 @@ $currentOptions["fields"] = array_merge(
 			?>
 				<tr data-idx="<?= $i ?>">
 					<td>
-						<input type="text" placeholder="Код поля"
+						<input type="text" placeholder="<?= Loc::getMessage("RODZETA_FEEDBACKFIELDS_FIELD_CODE") ?>"
 							name="fields[<?= $i ?>][0]"
 							value="<?= htmlspecialcharsex($field[0]) ?>"
 							<?= $readonly ?> style="width:96%;">
 					</td>
 					<td>
-						<input type="text" placeholder="Название поля"
+						<input type="text" placeholder="<?= Loc::getMessage("RODZETA_FEEDBACKFIELDS_FIELD_NAME") ?>"
 							name="fields[<?= $i ?>][1]"
 							value="<?= htmlspecialcharsex($field[1]) ?>"
 							style="width:96%;">
 					</td>
 					<td>
 						<input type="checkbox" style="margin-top:6px;"
-							title="Добавлять в CSV"
+							title="<?= Loc::getMessage("RODZETA_FEEDBACKFIELDS_FIELD_ADD_CSV") ?>"
 							name="fields[<?= $i ?>][2]"
 							value="Y" <?= $field[2] == "Y"? "checked" : "" ?>>
 					</td>
 					<td>
 						<select name="fields[<?= $i ?>][3]" style="width:96%;">
-							<option value="">Код поля для лида Bitrix24</option>
+							<option value=""><?= Loc::getMessage("RODZETA_FEEDBACKFIELDS_FIELD_CODE_BITRIX24") ?></option>
 							<?php foreach (array(
 										"COMPANY_TITLE",
 										"NAME",
@@ -132,12 +132,13 @@ $currentOptions["fields"] = array_merge(
 	</table>
 
 	<p>
-		&nbsp;&nbsp;&nbsp;Путь к CSV файлу:
+		&nbsp;&nbsp;&nbsp;<a href="<?= str_replace($_SERVER["DOCUMENT_ROOT"], "", FILE_FORMS) ?>"><?=
+			Loc::getMessage("RODZETA_FEEDBACKFIELDS_FILE_CSV") ?></a>:
 		<?= str_replace($_SERVER["DOCUMENT_ROOT"], "", FILE_FORMS) ?>
 	</p>
 
 	<br>
-	<div class="adm-detail-title">Данные аккаунта Bitrix24</div>
+	<div class="adm-detail-title"><?= Loc::getMessage("RODZETA_FEEDBACKFIELDS_BITRIX24_TITLE") ?></div>
 
 	<table width="100%">
 		<tr>
@@ -145,7 +146,7 @@ $currentOptions["fields"] = array_merge(
 				<input type="text" size="30" name="bitrix24_portal_url"
 					value="<?= htmlspecialcharsex($currentOptions["bitrix24"]["portal_url"]) ?>"
 					style="width:96%;"
-					placeholder="Адрес портала Bitrix24">
+					placeholder="<?= Loc::getMessage("RODZETA_FEEDBACKFIELDS_BITRIX24_URL") ?>">
 			</td>
 		</tr>
 		<tr>
@@ -153,7 +154,7 @@ $currentOptions["fields"] = array_merge(
 				<input type="text" size="30" name="bitrix24_login"
 					value="<?= htmlspecialcharsex($currentOptions["bitrix24"]["login"]) ?>"
 					style="width:96%;"
-					placeholder='LOGIN пользователя-"лидогенератора"'>
+					placeholder="<?= Loc::getMessage("RODZETA_FEEDBACKFIELDS_BITRIX24_LOGIN") ?>">
 			</td>
 		</tr>
 		<tr>
@@ -163,7 +164,7 @@ $currentOptions["fields"] = array_merge(
 					readonly
 	    		onfocus="this.removeAttribute('readonly')"
 	    		value="<?= htmlspecialcharsex($currentOptions["bitrix24"]["password"]) ?>"
-	    		placeholder='PASSWORD пользователя-"лидогенератора"'>
+	    		placeholder="<?= Loc::getMessage("RODZETA_FEEDBACKFIELDS_BITRIX24_PASSWORD") ?>">
 			</td>
 		</tr>
 	</table>
