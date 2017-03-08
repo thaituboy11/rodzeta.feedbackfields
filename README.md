@@ -22,6 +22,10 @@
 - выбрать список полей которые будут сохранятся в csv
 - для импорта лидов в Bitrix24 - задать список соответствий полей формы и полей лида, TITLE для лида берется из почтового шаблона формы.
 
+### Пример добавления параметра списка полей формы в компонент bitrix:main.feedback
+
+Добавить в шаблон компонента [.parameters.php](https://github.com/rivetweb/rodzeta.feedbackfields/blob/master/install/examples/.parameters.php)
+
 ### Пример вставки полей "Номер телефона" и "Регион" в шаблоне компонента
 
     <input name="USER_REGION" 
