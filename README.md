@@ -24,17 +24,31 @@
 
 ### Пример добавления параметра списка полей формы в компонент bitrix:main.feedback и автоматического вывода полей
 
-Добавить в шаблон компонента [.parameters.php](https://github.com/rivetweb/rodzeta.feedbackfields/blob/master/install/examples/.parameters.php)
+- Добавить в шаблон компонента [.parameters.php](https://github.com/rivetweb/rodzeta.feedbackfields/blob/master/install/examples/.parameters.php)
+- Добавить в шаблон компонента [result_modifier.php](https://github.com/rivetweb/rodzeta.feedbackfields/blob/master/install/examples/result_modifier.php)
+- Заменить вывод полей в в шаблон компонента (template.php) на код
+```
+<?php foreach ($arResult["FIELDS"] as $arField) { ?>
+    <div class="mf-<?= $arField["CODE"] ?>">
+        <div class="mf-text">
+            <?= $arField["~NAME"] ?>
+        </div>
+        <?= $arField["HTML"] ?>
+    </div>
+<?php } ?>
+```
 
-### Пример вставки полей "Номер телефона" и "Регион" в шаблоне компонента
+### Пример ручной вставки полей "Номер телефона" и "Регион" в шаблоне компонента
 
-    <input name="USER_REGION" 
-        value="<?= htmlspecialchars($_POST["USER_REGION"]) ?>"
-        placeholder="Регион">
+```
+<input name="USER_REGION"
+    value="<?= $arResult["FIELDS"]["USER_REGION"]["VALUE"] ?>"
+    placeholder="Регион">
 
-    <input name="USER_PHONE" 
-        value="<?= htmlspecialchars($_POST["USER_PHONE"]) ?>" 
-        placeholder="Ваш номер телефона">
+<input name="USER_PHONE"
+    value="<?= $arResult["FIELDS"]["USER_PHONE"]["VALUE"] ?>"
+    placeholder="Ваш номер телефона">
+```
 
 ### Пример редиректа для конкретной формы в component_epilog.php
 

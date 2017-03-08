@@ -113,3 +113,29 @@ function SortableParameter($selectedValues, $key) {
 		"PARENT" => "BASE",
 	);
 }
+
+function ForTemplate($orderedFields, $arResult) {
+	$result = array();
+	foreach ($orderedFields as $code => $title) {
+		$tmp = !empty($arResult[$code])? $arResult[$code]
+			: (!empty($_POST[$code])? $_POST[$code] : "");
+		$result[$code] = array(
+			"CODE" => $code,
+			"~NAME" => $title,
+			"NAME" => htmlspecialchars($title),
+			"~VALUE" => $tmp,
+			"VALUE" => htmlspecialchars($tmp),
+		);
+		if ($code == "TEXT" || substr($code, -5) == "_TEXT") {
+			$result[$code]["TYPE"] = "TEXT";
+			$result[$code]["HTML"] =
+				'<textarea name="' . $result[$code]["CODE"] . '">'
+					. $result[$code]["VALUE"] . '</textarea>';
+		} else {
+			$result[$code]["HTML"] =
+				'<input type="text" name="' . $result[$code]["CODE"]
+					. '" value="' . $result[$code]["VALUE"] . '">';
+		}
+	}
+	return $result;
+}
