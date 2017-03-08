@@ -24,9 +24,9 @@
 
 ### Пример добавления параметра списка полей формы в компонент bitrix:main.feedback и автоматического вывода полей
 
-- Добавить в шаблон компонента [.parameters.php](https://github.com/rivetweb/rodzeta.feedbackfields/blob/master/install/examples/.parameters.php)
-- Добавить в шаблон компонента [result_modifier.php](https://github.com/rivetweb/rodzeta.feedbackfields/blob/master/install/examples/result_modifier.php)
-- Заменить вывод полей в шаблоне компонента (template.php) на код
+- добавить в шаблон компонента [.parameters.php](https://github.com/rivetweb/rodzeta.feedbackfields/blob/master/install/examples/.parameters.php)
+- добавить в шаблон компонента [result_modifier.php](https://github.com/rivetweb/rodzeta.feedbackfields/blob/master/install/examples/result_modifier.php)
+- заменить вывод полей в шаблоне компонента (template.php) на код
 ```
 <?php foreach ($arResult["FIELDS"] as $arField) { ?>
     <div class="mf-<?= $arField["CODE"] ?>">
