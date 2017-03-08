@@ -7,6 +7,7 @@
 
 namespace Rodzeta\Feedbackfields;
 
+use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Config\Option;
 
 define(__NAMESPACE__ . "\ID", "rodzeta.feedbackfields");
@@ -23,6 +24,8 @@ define(__NAMESPACE__ . "\FILE_OPTIONS", CONFIG . ".php");
 define(__NAMESPACE__ . "\FILE_FORMS", CONFIG . ".formresults.csv");
 
 define(__NAMESPACE__ . "\EVENT_FEEDBACK_FORM", "FEEDBACK_FORM");
+
+Loc::loadMessages(__FILE__);
 
 require LIB . "encoding/php-array.php";
 require LIB . "collection/.init.php";
@@ -84,4 +87,29 @@ function FieldsSave($arFields, $arTemplate) {
 		fputcsv($fp, $row, "\t");
 		fclose($fp);
 	}
+}
+
+function SortableParameter($selectedValues, $key) {
+	$options = OptionsSelect();
+	$fields = array();
+	foreach ($selectedValues as $k => $v) {
+		$fields[] = array($k, $v, true);
+		unset($options["fields"][$k]);
+	}
+	foreach ($options["fields"] as $k => $v) {
+		$fields[] = array($k, $v[1], false);
+	}
+	$baseUrl = "/bitrix/tools/" . ID;
+	return array(
+		"NAME" => Loc::getMessage("RODZETA_FEEDBACKFIELDS_SORTABLE_PARAMETER_TITLE"),
+		"TYPE" => "CUSTOM",
+		"JS_FILE" => $baseUrl . ".settings.js",
+		"JS_EVENT" => "RodzetaFeedbackfields_SortableParameterEdit",
+		"JS_DATA" => json_encode(array(
+			"fields" => $fields,
+			"baseUrl" => $baseUrl,
+		)),
+		"DEFAULT" => null,
+		"PARENT" => "BASE",
+	);
 }

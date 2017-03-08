@@ -57,12 +57,18 @@ class rodzeta_feedbackfields extends CModule {
 			true,
 			true
 		);
+		$path = dirname($path) . "/tools/";
+		copy($modulePath . "/install/tools/" . $this->MODULE_ID . ".settings.js", $path . $this->MODULE_ID . ".settings.js");
+		copy($modulePath . "/install/tools/" . $this->MODULE_ID . ".sortable.js", $path . $this->MODULE_ID . ".sortable.js");
 		return true;
 	}
 
 	function UninstallFiles() {
 		$path = $_SERVER["DOCUMENT_ROOT"] . "/bitrix/admin/";
 		unlink($path . $this->MODULE_ID . ".php");
+		$path = dirname($path) . "/tools/";
+		unlink($path . $this->MODULE_ID . ".settings.js");
+		unlink($path . $this->MODULE_ID . ".sortable.js");
 		return true;
 	}
 
