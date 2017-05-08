@@ -60,6 +60,13 @@ class rodzeta_feedbackfields extends CModule {
 		$path = dirname($path) . "/tools/";
 		copy($modulePath . "/install/tools/" . $this->MODULE_ID . ".settings.js", $path . $this->MODULE_ID . ".settings.js");
 		copy($modulePath . "/install/tools/" . $this->MODULE_ID . ".sortable.js", $path . $this->MODULE_ID . ".sortable.js");
+
+		CopyDirFiles(
+	    $_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/" . $this->MODULE_ID . "/install/templates",
+	    $_SERVER["DOCUMENT_ROOT"] . "/bitrix/templates/.default",
+	    true, true
+    );
+    
 		return true;
 	}
 
