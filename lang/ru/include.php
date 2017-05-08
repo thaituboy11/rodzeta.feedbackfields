@@ -1,3 +1,3 @@
 <?php
 
-$MESS["RODZETA_FEEDBACKFIELDS_OPTIONS"] = "Доп. поля форм";
+$MESS["RODZETA_FEEDBACKFIELDS_OPTIONS"] = "Поля форм";
