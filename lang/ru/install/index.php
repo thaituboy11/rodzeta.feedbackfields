@@ -1,7 +1,7 @@
 <?php
 
-$MESS["RODZETA_FEEDBACKFIELDS_MODULE_NAME"] = "Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РїРѕР»СЏ РґР»СЏ РєРѕРјРїРѕРЅРµРЅС‚Р° Р¤РѕСЂРјР° РѕР±СЂР°С‚РЅРѕР№ СЃРІСЏР·Рё";
-$MESS["RODZETA_FEEDBACKFIELDS_MODULE_DESCRIPTION"] = "Р”Р°РЅРЅС‹Р№ РјРѕРґСѓР»СЊ РїРѕР·РІРѕР»СЏРµС‚ РґРѕР±Р°РІР»СЏС‚СЊ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РїРѕР»СЏ РґР»СЏ СЃС‚Р°РЅРґР°СЂС‚РЅРѕРіРѕ РєРѕРјРїРѕРЅРµРЅС‚Р° Р¤РѕСЂРјР° РѕР±СЂР°С‚РЅРѕР№ СЃРІСЏР·Рё bitrix:main.feedback Рё СЃРѕС…СЂР°РЅСЏС‚СЊ РґР°РЅРЅС‹Рµ С„РѕСЂРј";
+$MESS["RODZETA_FEEDBACKFIELDS_MODULE_NAME"] = "Дополнительные поля для компонента Форма обратной связи";
+$MESS["RODZETA_FEEDBACKFIELDS_MODULE_DESCRIPTION"] = "Данный модуль позволяет добавлять дополнительные поля для стандартного компонента Форма обратной связи bitrix:main.feedback и сохранять данные форм";
 
-$MESS["RODZETA_REQUIREMENTS_PHP_VERSION"] = "РќРµРѕР±С…РѕРґРёРјР° РІРµСЂСЃРёСЏ PHP 7 РёР»Рё РІС‹С€Рµ";
-$MESS["RODZETA_REQUIREMENTS_BITRIX_UTF8"] = "Bitrix РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ СѓСЃС‚Р°РЅРѕРІР»РµРЅ РІ РєРѕРґРёСЂРѕРІРєРµ UTF-8";
+$MESS["RODZETA_REQUIREMENTS_PHP_VERSION"] = "Необходима версия PHP 7 или выше";
+$MESS["RODZETA_REQUIREMENTS_BITRIX_UTF8"] = "Bitrix должен быть установлен в кодировке UTF-8";

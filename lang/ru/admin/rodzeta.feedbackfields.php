@@ -1,22 +1,22 @@
 <?php
 
-$MESS["RODZETA_FEEDBACKFIELDS_FIELD_AUTHOR_TITLE"] = "Ð’Ð°ÑˆÐµ Ð¸Ð¼Ñ";
-$MESS["RODZETA_FEEDBACKFIELDS_FIELD_AUTHOR_EMAIL_TITLE"] = "Ð’Ð°Ñˆ e-mail";
-$MESS["RODZETA_FEEDBACKFIELDS_FIELD_TEXT_TITLE"] = "Ð’Ð°ÑˆÐµ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ";
+$MESS["RODZETA_FEEDBACKFIELDS_FIELD_AUTHOR_TITLE"] = "Âàøå èìÿ";
+$MESS["RODZETA_FEEDBACKFIELDS_FIELD_AUTHOR_EMAIL_TITLE"] = "Âàø e-mail";
+$MESS["RODZETA_FEEDBACKFIELDS_FIELD_TEXT_TITLE"] = "Âàøå ñîîáùåíèå";
 
-$MESS["RODZETA_FEEDBACKFIELDS_FIELD_USER_REGION_TITLE"] = "Ð ÐµÐ³Ð¸Ð¾Ð½";
-$MESS["RODZETA_FEEDBACKFIELDS_FIELD_USER_PHONE_TITLE"] = "Ð¢ÐµÐ»ÐµÑ„Ð¾Ð½";
-$MESS["RODZETA_FEEDBACKFIELDS_FIELD_USER_SITE_TITLE"] = "Ð¡Ð°Ð¹Ñ‚";
+$MESS["RODZETA_FEEDBACKFIELDS_FIELD_USER_REGION_TITLE"] = "Ðåãèîí";
+$MESS["RODZETA_FEEDBACKFIELDS_FIELD_USER_PHONE_TITLE"] = "Òåëåôîí";
+$MESS["RODZETA_FEEDBACKFIELDS_FIELD_USER_SITE_TITLE"] = "Ñàéò";
 
-$MESS["RODZETA_FEEDBACKFIELDS_TITLE"] = "Ð¡Ð¿Ð¸ÑÐ¾Ðº ÐºÐ¾Ð´Ð¾Ð² Ð´Ð»Ñ Ð´Ð¾Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ñ… Ð¿Ð¾Ð»ÐµÐ¹";
-$MESS["RODZETA_FEEDBACKFIELDS_FIELD_CODE"] = "ÐšÐ¾Ð´ Ð¿Ð¾Ð»Ñ";
-$MESS["RODZETA_FEEDBACKFIELDS_FIELD_NAME"] = "ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð¿Ð¾Ð»Ñ";
+$MESS["RODZETA_FEEDBACKFIELDS_TITLE"] = "Ñïèñîê êîäîâ äëÿ äîïîëíèòåëüíûõ ïîëåé";
+$MESS["RODZETA_FEEDBACKFIELDS_FIELD_CODE"] = "Êîä ïîëÿ";
+$MESS["RODZETA_FEEDBACKFIELDS_FIELD_NAME"] = "Íàçâàíèå ïîëÿ";
 
-$MESS["RODZETA_FEEDBACKFIELDS_FIELD_ADD_CSV"] = "Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÑÑ‚ÑŒ Ð² Ñ€ÐµÐ·ÑƒÐ»ÑŒÐ°Ñ‚Ð°Ñ…";
-$MESS["RODZETA_FEEDBACKFIELDS_FILE_CSV"] = "Ð¤Ð°Ð¹Ð» Ñ€ÐµÐ·ÑƒÐ»ÑŒÐ°Ñ‚Ð¾Ð² Ñ„Ð¾Ñ€Ð¼";
+$MESS["RODZETA_FEEDBACKFIELDS_FIELD_ADD_CSV"] = "Ñîõðàíÿòü â ðåçóëüàòàõ";
+$MESS["RODZETA_FEEDBACKFIELDS_FILE_CSV"] = "Ôàéë ðåçóëüàòîâ ôîðì";
 
-$MESS["RODZETA_FEEDBACKFIELDS_FIELD_CODE_BITRIX24"] = "ÐšÐ¾Ð´ Ð¿Ð¾Ð»Ñ Ð´Ð»Ñ Ð»Ð¸Ð´Ð° Bitrix24";
-$MESS["RODZETA_FEEDBACKFIELDS_BITRIX24_TITLE"] = "Ð”Ð°Ð½Ð½Ñ‹Ðµ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚Ð° Bitrix24";
-$MESS["RODZETA_FEEDBACKFIELDS_BITRIX24_URL"] = "ÐÐ´Ñ€ÐµÑ Ð¿Ð¾Ñ€Ñ‚Ð°Ð»Ð° Bitrix24";
-$MESS["RODZETA_FEEDBACKFIELDS_BITRIX24_LOGIN"] = 'LOGIN Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ-"Ð»Ð¸Ð´Ð¾Ð³ÐµÐ½ÐµÑ€Ð°Ñ‚Ð¾Ñ€Ð°"';
-$MESS["RODZETA_FEEDBACKFIELDS_BITRIX24_PASSWORD"] = 'PASSWORD Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ-"Ð»Ð¸Ð´Ð¾Ð³ÐµÐ½ÐµÑ€Ð°Ñ‚Ð¾Ñ€Ð°"';
+$MESS["RODZETA_FEEDBACKFIELDS_FIELD_CODE_BITRIX24"] = "Êîä ïîëÿ äëÿ ëèäà Bitrix24";
+$MESS["RODZETA_FEEDBACKFIELDS_BITRIX24_TITLE"] = "Äàííûå àêêàóíòà Bitrix24";
+$MESS["RODZETA_FEEDBACKFIELDS_BITRIX24_URL"] = "Àäðåñ ïîðòàëà Bitrix24";
+$MESS["RODZETA_FEEDBACKFIELDS_BITRIX24_LOGIN"] = 'LOGIN ïîëüçîâàòåëÿ-"ëèäîãåíåðàòîðà"';
+$MESS["RODZETA_FEEDBACKFIELDS_BITRIX24_PASSWORD"] = 'PASSWORD ïîëüçîâàòåëÿ-"ëèäîãåíåðàòîðà"';
