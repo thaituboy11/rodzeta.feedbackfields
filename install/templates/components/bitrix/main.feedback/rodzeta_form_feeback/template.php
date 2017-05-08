@@ -37,6 +37,24 @@ if(strlen($arResult["OK_MESSAGE"]) > 0)
 		<input type="text" name="user_email" value="<?=$arResult["AUTHOR_EMAIL"]?>">
 	</div>
 
+	<div class="mf-region">
+		<div class="mf-text">
+			Регион
+		</div>
+		<input name="USER_REGION"
+	    value="<?= htmlspecialchars($_POST["USER_REGION"]) ?>"
+	    placeholder="Регион">
+	</div>
+
+	<div class="mf-region">
+		<div class="mf-text">
+			Ваш номер телефона
+		</div>
+		<input name="USER_PHONE"
+	    value="<?= htmlspecialchars($_POST["USER_PHONE"]) ?>"
+	    placeholder="Ваш номер телефона">
+	</div>
+
 	<div class="mf-message">
 		<div class="mf-text">
 			<?=GetMessage("MFT_MESSAGE")?><?if(empty($arParams["REQUIRED_FIELDS"]) || in_array("MESSAGE", $arParams["REQUIRED_FIELDS"])):?><span class="mf-req">*</span><?endif?>
