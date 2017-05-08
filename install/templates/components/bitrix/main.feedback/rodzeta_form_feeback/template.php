@@ -39,20 +39,20 @@ if(strlen($arResult["OK_MESSAGE"]) > 0)
 
 	<div class="mf-region">
 		<div class="mf-text">
-			Р РµРіРёРѕРЅ
+			Регион
 		</div>
 		<input name="USER_REGION"
 	    value="<?= htmlspecialchars($_POST["USER_REGION"]) ?>"
-	    placeholder="Р РµРіРёРѕРЅ">
+	    placeholder="Регион">
 	</div>
 
 	<div class="mf-region">
 		<div class="mf-text">
-			Р’Р°С€ РЅРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°
+			Ваш номер телефона
 		</div>
 		<input name="USER_PHONE"
 	    value="<?= htmlspecialchars($_POST["USER_PHONE"]) ?>"
-	    placeholder="Р’Р°С€ РЅРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°">
+	    placeholder="Ваш номер телефона">
 	</div>
 
 	<div class="mf-message">
